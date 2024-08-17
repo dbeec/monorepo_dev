@@ -19,6 +19,7 @@
   },
   "packageManager": "npm@10.8.1",
   "dependencies": {
+    "@nestjs/mapped-types": "*",
     "zustand": "^4.5.5"
   }
 }
