@@ -1,0 +1,71 @@
+.main__content {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #259780;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  width: 375px;
+  height: 100%;
+  padding: 2rem;
+
+  @media (min-width: 768px) {
+    width: 350px;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo img {
+  object-fit: contain;
+  /* width: 300px; */
+}
+
+.logo h1 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #333;
+  margin-top: 1.5rem;
+}
+
+.logo p {
+  font-size: 0.77rem;
+  color: #222;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  background-color: #f95e21;
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #fa682e;
+}
