@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { AuthModule } from './modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './modules/users/users.module';
+import { RolesModule } from './modules/roles/roles.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    AuthModule,
+    UsersModule,
+    RolesModule,
   ],
   controllers: [],
   providers: [],
