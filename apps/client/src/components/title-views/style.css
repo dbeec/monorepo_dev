@@ -1,0 +1,12 @@
+.main_container {
+  margin-bottom: 1rem;
+}
+
+.main_container h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.main_container p {
+  font-size: .8rem;
+}

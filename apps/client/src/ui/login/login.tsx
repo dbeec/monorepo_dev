@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./styles.css";
+import { Link } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -104,11 +105,11 @@ export default function Login() {
               }}
             />
 
-            <a href="/">
+            <Link to="/dashboard">
               <button className="button" type="submit">
                 Iniciar sesión
               </button>
-            </a>
+            </Link>
           </form>
         </div>
       </div>

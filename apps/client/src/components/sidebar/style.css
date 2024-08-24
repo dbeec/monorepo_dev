@@ -1,5 +1,6 @@
 .main_sidebar {
+  background: #405D72;
   width: 18%;
   height: 100%;
-  background: green;
+  padding: 0 20px;
 }

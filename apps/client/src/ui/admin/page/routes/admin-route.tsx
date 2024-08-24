@@ -8,7 +8,7 @@ export const adminRouter: RouteObject = {
   errorElement: <ErrorPage />,
   children: [
     {
-      path: "/admin",
+      path: "/dashboard",
       index: true,
       element: <AdminContent />,
     },

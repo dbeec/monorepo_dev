@@ -1,0 +1,39 @@
+/* BLOQUE DE LAS CARDS */
+
+.cards_container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  width: 220px;
+  height: 100px;
+  padding: 0.9rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 3px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+.card_content span {
+  font-size: .95rem;
+}
+
+.card_content p {
+  font-size: 1.2rem;
+}
+
+/* BLOQUE DE LA TABLA */
+
+.table_container {
+  background: #fff;
+  width: 100%;
+  height: auto;
+}
