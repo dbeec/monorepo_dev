@@ -1,15 +1,28 @@
-import "./styles.css";
+import "./style.css";
 import CloseIcon from "@mui/icons-material/Close";
-export default function Modal({ children, status, changeStatus }: any) {
+
+interface ModalProps {
+  children?: React.ReactNode;
+  status?: boolean;
+  changeStatus?: (status: boolean) => void;
+  title?: string;
+}
+
+export default function Modal({
+  children,
+  status,
+  changeStatus,
+  title,
+}: ModalProps) {
   return (
     <>
       {status && (
         <div className="overlay">
-          <div className="content">
+          <div className="content__modal">
             <div className="header">
-              <h1>Title</h1>
+              <h1>{title}</h1>
             </div>
-            <div className="btn__close" onClick={changeStatus(false)}>
+            <div className="btn__close">
               <CloseIcon />
             </div>
 

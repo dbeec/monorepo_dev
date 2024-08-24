@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-export default function OutletPage() {
+export default function OutletModule() {
   return (
     <>
       <div className="outlet">

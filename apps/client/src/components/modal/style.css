@@ -8,10 +8,10 @@
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.3);
-  padding: 3rem;
+  /* padding: 3rem; */
 }
 
-.content {
+.content__modal {
   position: relative;
   background: #fff;
   width: 600px;
