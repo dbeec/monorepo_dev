@@ -1,9 +1,6 @@
-import Login from "../ui/login/login";
+import { createBrowserRouter } from "react-router-dom";
+import { adminRoute } from "../ui/admin/page/routes";
 
-export default function Root() {
-  return (
-    <>
-      <Login />
-    </>
-  );
-}
+export const route = createBrowserRouter([
+  ...adminRoute,
+])

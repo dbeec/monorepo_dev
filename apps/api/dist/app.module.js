@@ -12,6 +12,7 @@ const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_module_1 = require("./modules/users/users.module");
+const roles_module_1 = require("./modules/roles/roles.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -32,6 +33,7 @@ exports.AppModule = AppModule = __decorate([
                 synchronize: true,
             }),
             users_module_1.UsersModule,
+            roles_module_1.RolesModule,
         ],
         controllers: [],
         providers: [],
