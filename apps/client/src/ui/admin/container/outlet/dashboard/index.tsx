@@ -4,47 +4,19 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import BusinessIcon from "@mui/icons-material/Business";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
-import { DataGrid, GridToolbar, GridToolbarExport } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
-const VISIBLE_FIELDS = ['document'];
+// const VISIBLE_FIELDS = ['document'];
 
 export default function AdminContent() {
   const [searchText, setSearchText] = useState("");
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      nombres: "johan",
-      apellidos: "diaz",
-      document_type: "CC",
-      document: "123456",
-      company: "Empresa A",
-    },
-    {
-      id: 2,
-      nombres: "maria",
-      apellidos: "rodriguez",
-      document_type: "CC",
-      document: "789012",
-      company: "Empresa B",
-    },
-    // Agrega más filas según sea necesario
-  ]);
+
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
 
-  const filteredRows = rows.filter((row) =>
-    Object.values(row).some((value) =>
-      String(value).toLowerCase().includes(searchText.toLowerCase())
-    )
-  );
-
-  // const columns = React.useMemo(
-  //   () => data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
-  //   [data.columns],
-  // );
   return (
     <>
       <TitleViews
@@ -159,7 +131,9 @@ export default function AdminContent() {
                 resizable: false,
               },
             ]}
-            rows={filteredRows}
+            rows={[{
+              id: 1,
+            }]}
             slots={{
               toolbar: () => (
                 <div
