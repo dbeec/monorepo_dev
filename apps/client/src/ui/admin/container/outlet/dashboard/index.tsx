@@ -4,8 +4,47 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import BusinessIcon from "@mui/icons-material/Business";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
+import { DataGrid, GridToolbar, GridToolbarExport } from "@mui/x-data-grid";
+import { TextField } from "@mui/material";
+import { ChangeEvent, useState } from "react";
+
+const VISIBLE_FIELDS = ['document'];
 
 export default function AdminContent() {
+  const [searchText, setSearchText] = useState("");
+  const [rows, setRows] = useState([
+    {
+      id: 1,
+      nombres: "johan",
+      apellidos: "diaz",
+      document_type: "CC",
+      document: "123456",
+      company: "Empresa A",
+    },
+    {
+      id: 2,
+      nombres: "maria",
+      apellidos: "rodriguez",
+      document_type: "CC",
+      document: "789012",
+      company: "Empresa B",
+    },
+    // Agrega más filas según sea necesario
+  ]);
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+  };
+
+  const filteredRows = rows.filter((row) =>
+    Object.values(row).some((value) =>
+      String(value).toLowerCase().includes(searchText.toLowerCase())
+    )
+  );
+
+  // const columns = React.useMemo(
+  //   () => data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
+  //   [data.columns],
+  // );
   return (
     <>
       <TitleViews
@@ -60,9 +99,90 @@ export default function AdminContent() {
       <div className="table_container">
         <TitleViews text="Tabla para visualizar todos los empleados." />
 
-        
-
-        
+        <div style={{ display: "grid", background: "#fff" }}>
+          <TextField
+            label="Buscar"
+            variant="outlined"
+            size="small"
+            value={searchText}
+            onChange={handleSearch}
+            style={{ marginBottom: "1rem", width: "100%" }}
+          />
+          <DataGrid
+            columns={[
+              {
+                field: "id",
+                headerName: "NO.",
+                width: 50,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+              },
+              {
+                field: "document_type",
+                headerName: "TIPO DOCUMENTO",
+                width: 150,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+              },
+              {
+                field: "document",
+                headerName: "DOCUMENTO",
+                width: 150,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+              },
+              {
+                field: "nombres",
+                headerName: "NOMBRES",
+                width: 200,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+              },
+              {
+                field: "apellidos",
+                headerName: "APELLIDOS",
+                width: 200,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+              },
+              {
+                field: "company",
+                headerName: "EMPRESA",
+                width: 150,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+              },
+            ]}
+            rows={filteredRows}
+            slots={{
+              toolbar: () => (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    padding: ".6rem",
+                  }}
+                >
+                  <GridToolbar />
+                </div>
+              ),
+            }}
+            initialState={{
+              density: "compact",
+            }}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
+              },
+            }}
+          />
+        </div>
       </div>
     </>
   );
