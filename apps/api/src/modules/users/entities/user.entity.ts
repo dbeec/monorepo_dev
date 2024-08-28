@@ -1,9 +1,11 @@
+import { Company } from 'src/modules/companies/entities/company.entity';
 import { Role } from 'src/modules/roles/entities/role.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,7 +14,7 @@ import {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  userId: number;
 
   @Column()
   document_type: string;
@@ -43,6 +45,9 @@ export class User {
 
   @OneToMany(() => Role, (role) => role.user)
   roles: Role[];
+
+  @ManyToMany(() => Company, (company) => company.users)
+  company: Company;
 
   @CreateDateColumn()
   created_at: Date;

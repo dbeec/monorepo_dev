@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+const company_entity_1 = require("../../companies/entities/company.entity");
 const role_entity_1 = require("../../roles/entities/role.entity");
 const typeorm_1 = require("typeorm");
 let User = class User {
@@ -18,7 +19,7 @@ exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], User.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
@@ -59,6 +60,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => role_entity_1.Role, (role) => role.user),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => company_entity_1.Company, (company) => company.users),
+    __metadata("design:type", company_entity_1.Company)
+], User.prototype, "company", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

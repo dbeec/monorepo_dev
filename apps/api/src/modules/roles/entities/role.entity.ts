@@ -1,10 +1,18 @@
 import { User } from 'src/modules/users/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Role {
   @PrimaryGeneratedColumn()
-  id: number;
+  roleId: number;
 
   @Column({ unique: true })
   name_rol: string;
@@ -12,12 +20,12 @@ export class Role {
   @ManyToOne(() => User, (user) => user.roles)
   user: User;
 
-  @Column()
-  create_at: Date;
+  @CreateDateColumn()
+  created_at: Date;
 
-  @Column()
-  update_at: Date;
+  @UpdateDateColumn()
+  updated_at: Date;
 
-  @Column()
-  delete_at: Date;
+  @DeleteDateColumn()
+  deleted_at: Date;
 }

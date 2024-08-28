@@ -18,7 +18,7 @@ exports.Role = Role;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Role.prototype, "id", void 0);
+], Role.prototype, "roleId", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
@@ -28,17 +28,17 @@ __decorate([
     __metadata("design:type", user_entity_1.User)
 ], Role.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Role.prototype, "create_at", void 0);
+], Role.prototype, "created_at", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Role.prototype, "update_at", void 0);
+], Role.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], Role.prototype, "delete_at", void 0);
+], Role.prototype, "deleted_at", void 0);
 exports.Role = Role = __decorate([
     (0, typeorm_1.Entity)()
 ], Role);

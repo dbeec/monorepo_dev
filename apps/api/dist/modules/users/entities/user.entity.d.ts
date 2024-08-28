@@ -1,6 +1,7 @@
+import { Company } from 'src/modules/companies/entities/company.entity';
 import { Role } from 'src/modules/roles/entities/role.entity';
 export declare class User {
-    id: number;
+    userId: number;
     document_type: string;
     document: string;
     firstname: string;
@@ -11,6 +12,7 @@ export declare class User {
     phone: string;
     password: string;
     roles: Role[];
+    company: Company;
     created_at: Date;
     updated_at: Date;
     deleted_at: Date;

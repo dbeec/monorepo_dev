@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { CompaniesModule } from './modules/companies/companies.module';
+import { DocumentTypesModule } from './modules/document-types/document-types.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CompaniesModule } from './modules/companies/companies.module';
     UsersModule,
     RolesModule,
     CompaniesModule,
+    DocumentTypesModule,
   ],
   controllers: [],
   providers: [],
