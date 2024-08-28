@@ -13,6 +13,7 @@ const path_1 = require("path");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_module_1 = require("./modules/users/users.module");
 const roles_module_1 = require("./modules/roles/roles.module");
+const companies_module_1 = require("./modules/companies/companies.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,6 +35,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             users_module_1.UsersModule,
             roles_module_1.RolesModule,
+            companies_module_1.CompaniesModule,
         ],
         controllers: [],
         providers: [],

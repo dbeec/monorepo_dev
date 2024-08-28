@@ -1,3 +1,4 @@
+import { Role } from 'src/modules/roles/entities/role.entity';
 export declare class User {
     id: number;
     document_type: string;
@@ -9,6 +10,7 @@ export declare class User {
     email: string;
     phone: string;
     password: string;
+    roles: Role[];
     created_at: Date;
     updated_at: Date;
     deleted_at: Date;
