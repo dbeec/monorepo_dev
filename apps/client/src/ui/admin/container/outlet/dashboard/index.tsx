@@ -6,6 +6,7 @@ import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import {
   DataGrid,
+  GridColDef,
   GridRenderCellParams,
   GridToolbarExport,
   GridToolbarQuickFilter,
@@ -14,20 +15,24 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
+const defaultColumnOptions: Partial<GridColDef> = {
+  sortable: false,
+  filterable: false,
+  resizable: false,
+  headerAlign: "center",
+};
+
 export default function AdminContent() {
   const handleEdit = (id: number) => {
     console.log("Edit", id);
-    // Implementar lógica de edición aquí
   };
 
   const handleView = (id: number) => {
     console.log("View", id);
-    // Implementar lógica de visualización aquí
   };
 
   const handleDelete = (id: number) => {
     console.log("Delete", id);
-    // Implementar lógica de eliminación aquí
   };
   return (
     <>
@@ -91,98 +96,78 @@ export default function AdminContent() {
                 field: "id",
                 headerName: "NO.",
                 width: 50,
-                sortable: false,
-                filterable: false,
-                resizable: false,
                 align: "center",
+                ...defaultColumnOptions,
               },
               {
                 field: "document_type",
                 headerName: "TIPO DOC",
                 width: 50,
-                sortable: false,
-                filterable: false,
-                resizable: false,
                 align: "center",
+                ...defaultColumnOptions,
               },
               {
                 field: "document",
                 headerName: "NO. DOCUMENTO",
                 width: 100,
-                sortable: false,
-                filterable: false,
-                resizable: false,
                 align: "right",
+                ...defaultColumnOptions,
               },
               {
                 field: "name",
                 headerName: "NOMBRE COMPLETO",
+                width: 220,
+                align: "left",
                 // valueGetter: (params) => {
                 //   return `${params.firstsurname || ""} ${params.secondsurname || ""} ${params.firstname || ""} ${params.middlename}`;
                 // },
-                width: 220,
-                sortable: false,
-                filterable: false,
-                resizable: false,
-                align: "left",
+                ...defaultColumnOptions,
               },
               {
                 field: "company",
                 headerName: "EMPRESA",
-                width: 120,
-                sortable: false,
-                filterable: false,
-                resizable: false,
+                width: 100,
                 align: "center",
+                ...defaultColumnOptions,
               },
               {
                 field: "role",
                 headerName: "CARGO",
-                width: 150,
-                sortable: false,
-                filterable: false,
-                resizable: false,
+                width: 170,
                 align: "center",
+                ...defaultColumnOptions,
               },
               {
                 field: "h_entrada",
                 headerName: "HORA ENTRADA",
                 width: 130,
-                sortable: false,
-                filterable: false,
-                resizable: false,
                 align: "center",
+                ...defaultColumnOptions,
               },
               {
                 field: "h_salida",
                 headerName: "HORA SALIDA",
                 width: 130,
-                sortable: false,
-                filterable: false,
-                resizable: false,
                 align: "center",
+                ...defaultColumnOptions,
               },
               {
                 field: "actions",
-                headerName: "ACCIONES",
-                sortable: false,
-                filterable: false,
-                resizable: false,
-                align: "center",
+                headerName: "ACCIÓN",
+                ...defaultColumnOptions,
                 renderCell: (params: GridRenderCellParams<any, any>) => (
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      gap: "0.5rem",
+                      gap: "0.3rem",
                       height: "100%",
                     }}
                   >
                     <VisibilityOutlinedIcon
                       onClick={() => handleView(Number(params.id))}
                       style={{
-                        display: "flex",
                         cursor: "pointer",
                         color: "#1976d2",
                         fontSize: "1.2rem",
@@ -209,6 +194,7 @@ export default function AdminContent() {
               },
             ]}
             rows={[
+              // aqui se debe colocar el estado que guarda la data de la bd
               {
                 id: 1,
                 document_type: "CC",
@@ -224,6 +210,16 @@ export default function AdminContent() {
                 document_type: "CC",
                 document: 1002029388,
                 name: "CORCHO CARRANZA ELIZABETH DANIELA",
+                company: "WOW",
+                role: "DEVELOPER",
+                h_entrada: "08:01",
+                h_salida: "05:21",
+              },
+              {
+                id: 3,
+                document_type: "CC",
+                document: 8743306,
+                name: "GALVIS SMITH SERGIO ANDRES",
                 company: "WOW",
                 role: "DEVELOPER",
                 h_entrada: "08:01",
