@@ -4,19 +4,9 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import BusinessIcon from "@mui/icons-material/Business";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { TextField } from "@mui/material";
-import { ChangeEvent, useState } from "react";
-
-// const VISIBLE_FIELDS = ['document'];
+import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
 
 export default function AdminContent() {
-  const [searchText, setSearchText] = useState("");
-
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
-  };
-
   return (
     <>
       <TitleViews
@@ -72,14 +62,6 @@ export default function AdminContent() {
         <TitleViews text="Tabla para visualizar todos los empleados." />
 
         <div style={{ display: "grid", background: "#fff" }}>
-          <TextField
-            label="Buscar"
-            variant="outlined"
-            size="small"
-            value={searchText}
-            onChange={handleSearch}
-            style={{ marginBottom: "1rem", width: "100%" }}
-          />
           <DataGrid
             columns={[
               {
@@ -89,38 +71,34 @@ export default function AdminContent() {
                 sortable: false,
                 filterable: false,
                 resizable: false,
+                align: "center",
               },
               {
                 field: "document_type",
-                headerName: "TIPO DOCUMENTO",
-                width: 150,
+                headerName: "TIPO DOC",
+                width: 90,
                 sortable: false,
                 filterable: false,
                 resizable: false,
+                align: "center",
               },
               {
                 field: "document",
-                headerName: "DOCUMENTO",
+                headerName: "NO. DOCUMENTO",
                 width: 150,
                 sortable: false,
                 filterable: false,
                 resizable: false,
+                align: "right",
               },
               {
-                field: "nombres",
-                headerName: "NOMBRES",
+                field: "name",
+                headerName: "NOMBRE COMPLETO",
                 width: 200,
                 sortable: false,
                 filterable: false,
                 resizable: false,
-              },
-              {
-                field: "apellidos",
-                headerName: "APELLIDOS",
-                width: 200,
-                sortable: false,
-                filterable: false,
-                resizable: false,
+                align: "left",
               },
               {
                 field: "company",
@@ -129,21 +107,60 @@ export default function AdminContent() {
                 sortable: false,
                 filterable: false,
                 resizable: false,
+                align: "center",
+              },
+              {
+                field: "h_entrada",
+                headerName: "HORA ENTRADA",
+                width: 150,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+                align: "center",
+              },
+              {
+                field: "h_salida",
+                headerName: "HORA SALIDA",
+                width: 150,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+                align: "center",
               },
             ]}
-            rows={[{
-              id: 1,
-            }]}
+            rows={[
+              {
+                id: 1,
+                document_type: "CC",
+                document: 1143168571,
+                name: "DÍAZ QUINTERO JOHAN DAVID",
+                company: "WOW DESARROLLOS DIGITALES",
+                h_entrada: "08:01",
+                h_salida: "05:21",
+              },
+              {
+                id: 1,
+                document_type: "CC",
+                document: 1143168571,
+                name: "DÍAZ QUINTERO JOHAN DAVID",
+                company: "WOW DESARROLLOS DIGITALES",
+                h_entrada: "08:01",
+                h_salida: "05:21",
+              },
+            ]}
             slots={{
               toolbar: () => (
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "flex-start",
+                    justifyContent: "flex-end",
                     padding: ".6rem",
                   }}
                 >
-                  <GridToolbar />
+                  <GridToolbarQuickFilter
+                    placeholder="Nro. documento"
+                    size="small"
+                  />
                 </div>
               ),
             }}
