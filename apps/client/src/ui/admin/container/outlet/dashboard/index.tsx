@@ -4,9 +4,31 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import BusinessIcon from "@mui/icons-material/Business";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
-import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridRenderCellParams,
+  GridToolbarExport,
+  GridToolbarQuickFilter,
+} from "@mui/x-data-grid";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 export default function AdminContent() {
+  const handleEdit = (id: number) => {
+    console.log("Edit", id);
+    // Implementar lógica de edición aquí
+  };
+
+  const handleView = (id: number) => {
+    console.log("View", id);
+    // Implementar lógica de visualización aquí
+  };
+
+  const handleDelete = (id: number) => {
+    console.log("Delete", id);
+    // Implementar lógica de eliminación aquí
+  };
   return (
     <>
       <TitleViews
@@ -63,6 +85,7 @@ export default function AdminContent() {
 
         <div style={{ display: "grid", background: "#fff" }}>
           <DataGrid
+            checkboxSelection
             columns={[
               {
                 field: "id",
@@ -76,7 +99,7 @@ export default function AdminContent() {
               {
                 field: "document_type",
                 headerName: "TIPO DOC",
-                width: 90,
+                width: 50,
                 sortable: false,
                 filterable: false,
                 resizable: false,
@@ -85,7 +108,7 @@ export default function AdminContent() {
               {
                 field: "document",
                 headerName: "NO. DOCUMENTO",
-                width: 150,
+                width: 100,
                 sortable: false,
                 filterable: false,
                 resizable: false,
@@ -94,7 +117,10 @@ export default function AdminContent() {
               {
                 field: "name",
                 headerName: "NOMBRE COMPLETO",
-                width: 200,
+                // valueGetter: (params) => {
+                //   return `${params.firstsurname || ""} ${params.secondsurname || ""} ${params.firstname || ""} ${params.middlename}`;
+                // },
+                width: 220,
                 sortable: false,
                 filterable: false,
                 resizable: false,
@@ -103,6 +129,15 @@ export default function AdminContent() {
               {
                 field: "company",
                 headerName: "EMPRESA",
+                width: 120,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+                align: "center",
+              },
+              {
+                field: "role",
+                headerName: "CARGO",
                 width: 150,
                 sortable: false,
                 filterable: false,
@@ -112,7 +147,7 @@ export default function AdminContent() {
               {
                 field: "h_entrada",
                 headerName: "HORA ENTRADA",
-                width: 150,
+                width: 130,
                 sortable: false,
                 filterable: false,
                 resizable: false,
@@ -121,11 +156,56 @@ export default function AdminContent() {
               {
                 field: "h_salida",
                 headerName: "HORA SALIDA",
-                width: 150,
+                width: 130,
                 sortable: false,
                 filterable: false,
                 resizable: false,
                 align: "center",
+              },
+              {
+                field: "actions",
+                headerName: "ACCIONES",
+                sortable: false,
+                filterable: false,
+                resizable: false,
+                align: "center",
+                renderCell: (params: GridRenderCellParams<any, any>) => (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      height: "100%",
+                    }}
+                  >
+                    <VisibilityOutlinedIcon
+                      onClick={() => handleView(Number(params.id))}
+                      style={{
+                        display: "flex",
+                        cursor: "pointer",
+                        color: "#1976d2",
+                        fontSize: "1.2rem",
+                      }}
+                    />
+                    <EditOutlinedIcon
+                      onClick={() => handleEdit(Number(params.id))}
+                      style={{
+                        cursor: "pointer",
+                        color: "#ffa000",
+                        fontSize: "1.2rem",
+                      }}
+                    />
+                    <DeleteOutlineOutlinedIcon
+                      onClick={() => handleDelete(Number(params.id))}
+                      style={{
+                        cursor: "pointer",
+                        color: "#d32f2f",
+                        fontSize: "1.2rem",
+                      }}
+                    />
+                  </div>
+                ),
               },
             ]}
             rows={[
@@ -134,34 +214,40 @@ export default function AdminContent() {
                 document_type: "CC",
                 document: 1143168571,
                 name: "DÍAZ QUINTERO JOHAN DAVID",
-                company: "WOW DESARROLLOS DIGITALES",
+                company: "CAE",
+                role: "PROJECT MANAGER",
                 h_entrada: "08:01",
                 h_salida: "05:21",
               },
               {
-                id: 1,
+                id: 2,
                 document_type: "CC",
-                document: 1143168571,
-                name: "DÍAZ QUINTERO JOHAN DAVID",
-                company: "WOW DESARROLLOS DIGITALES",
+                document: 1002029388,
+                name: "CORCHO CARRANZA ELIZABETH DANIELA",
+                company: "WOW",
+                role: "DEVELOPER",
                 h_entrada: "08:01",
                 h_salida: "05:21",
               },
             ]}
             slots={{
               toolbar: () => (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    padding: ".6rem",
-                  }}
-                >
-                  <GridToolbarQuickFilter
-                    placeholder="Nro. documento"
-                    size="small"
-                  />
-                </div>
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: ".6rem",
+                    }}
+                  >
+                    <GridToolbarExport />
+                    <GridToolbarQuickFilter
+                      placeholder="No. documento"
+                      size="small"
+                      sx={{ width: "20%" }}
+                    />
+                  </div>
+                </>
               ),
             }}
             initialState={{
