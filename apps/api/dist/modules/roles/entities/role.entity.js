@@ -29,15 +29,15 @@ __decorate([
 ], Role.prototype, "user", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", Object)
 ], Role.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", Object)
 ], Role.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", Object)
 ], Role.prototype, "deleted_at", void 0);
 exports.Role = Role = __decorate([
     (0, typeorm_1.Entity)()

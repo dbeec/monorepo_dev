@@ -117,7 +117,7 @@ export default function AdminContent() {
               {
                 field: "name",
                 headerName: "NOMBRE COMPLETO",
-                flex: 2,
+                flex: 1.5,
                 align: "left",
                 // valueGetter: (params) => {
                 //   return `${params.firstsurname || ""} ${params.secondsurname || ""} ${params.firstname || ""} ${params.middlename}`;
@@ -134,14 +134,14 @@ export default function AdminContent() {
               {
                 field: "role",
                 headerName: "CARGO",
-                flex: 1,
+                flex: 1.5,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "h_entrada",
                 headerName: "HORA ENTRADA",
-                flex: 1,
+                flex: 1.2,
                 align: "center",
                 ...defaultColumnOptions,
               },
