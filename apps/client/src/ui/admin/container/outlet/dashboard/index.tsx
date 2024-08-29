@@ -58,9 +58,9 @@ export default function AdminContent() {
         </div>
       </div>
 
+      {/* Tabla */}
+      <TitleViews text="Tabla para visualizar todos los empleados." />
       <div className="table_container">
-        <TitleViews text="Tabla para visualizar todos los empleados." />
-
         <MainTable />
       </div>
     </>
