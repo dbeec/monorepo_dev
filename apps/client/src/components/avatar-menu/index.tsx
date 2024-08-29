@@ -1,5 +1,4 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,7 +21,9 @@ export default function ProfileMenu() {
 
   return (
     <>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+      <div
+        style={{ display: "flex", alignItems: "center", textAlign: "center" }}
+      >
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -35,7 +36,7 @@ export default function ProfileMenu() {
             <Avatar sx={{ width: 32, height: 32 }}>J</Avatar>
           </IconButton>
         </Tooltip>
-      </Box>
+      </div>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -71,8 +72,8 @@ export default function ProfileMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose} >
-          <Avatar /> Profile
+        <MenuItem onClick={handleClose}>
+          <Avatar /> Johan Díaz
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>

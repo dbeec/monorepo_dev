@@ -24,15 +24,15 @@ __decorate([
 ], DocumentType.prototype, "name_document", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], DocumentType.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], DocumentType.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], DocumentType.prototype, "deleted_at", void 0);
 exports.DocumentType = DocumentType = __decorate([
     (0, typeorm_1.Entity)()

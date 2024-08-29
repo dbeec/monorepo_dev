@@ -29,15 +29,15 @@ __decorate([
 ], Company.prototype, "users", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], Company.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], Company.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
-    __metadata("design:type", Object)
+    __metadata("design:type", Date)
 ], Company.prototype, "deleted_at", void 0);
 exports.Company = Company = __decorate([
     (0, typeorm_1.Entity)()
