@@ -95,28 +95,29 @@ export default function AdminContent() {
               {
                 field: "id",
                 headerName: "NO.",
-                width: 50,
+                // width: 50,
+                flex: .5,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "document_type",
                 headerName: "TIPO DOC",
-                width: 50,
+                flex: .5,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "document",
                 headerName: "NO. DOCUMENTO",
-                width: 100,
+                flex: 1,
                 align: "right",
                 ...defaultColumnOptions,
               },
               {
                 field: "name",
                 headerName: "NOMBRE COMPLETO",
-                width: 220,
+                flex: 2,
                 align: "left",
                 // valueGetter: (params) => {
                 //   return `${params.firstsurname || ""} ${params.secondsurname || ""} ${params.firstname || ""} ${params.middlename}`;
@@ -126,34 +127,35 @@ export default function AdminContent() {
               {
                 field: "company",
                 headerName: "EMPRESA",
-                width: 100,
+                flex: 1,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "role",
                 headerName: "CARGO",
-                width: 170,
+                flex: 1,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "h_entrada",
                 headerName: "HORA ENTRADA",
-                width: 130,
+                flex: 1,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "h_salida",
                 headerName: "HORA SALIDA",
-                width: 130,
+                flex: 1,
                 align: "center",
                 ...defaultColumnOptions,
               },
               {
                 field: "actions",
                 headerName: "ACCIÓN",
+                flex: 1,
                 ...defaultColumnOptions,
                 renderCell: (params: GridRenderCellParams<any, any>) => (
                   <div
