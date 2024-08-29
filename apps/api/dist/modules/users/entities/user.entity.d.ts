@@ -1,7 +1,7 @@
 import { Company } from 'src/modules/companies/entities/company.entity';
 import { Role } from 'src/modules/roles/entities/role.entity';
 export declare class User {
-    userId: number;
+    userId: string;
     document_type: string;
     document: string;
     firstname: string;

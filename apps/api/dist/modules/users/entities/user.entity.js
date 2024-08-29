@@ -17,15 +17,15 @@ let User = class User {
 };
 exports.User = User;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
+    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
+    __metadata("design:type", String)
 ], User.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "document_type", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "document", void 0);
 __decorate([
@@ -41,7 +41,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "firstsurname", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "secondsurname", void 0);
 __decorate([
@@ -58,6 +58,7 @@ __decorate([
 ], User.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => role_entity_1.Role, (role) => role.user),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
 __decorate([
