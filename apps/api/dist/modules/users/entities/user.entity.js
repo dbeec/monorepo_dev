@@ -58,11 +58,11 @@ __decorate([
 ], User.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => role_entity_1.Role, (role) => role.user),
-    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => company_entity_1.Company, (company) => company.users),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", company_entity_1.Company)
 ], User.prototype, "company", void 0);
 __decorate([

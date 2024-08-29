@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -45,10 +45,10 @@ export class User {
   password: string;
 
   @OneToMany(() => Role, (role) => role.user)
-  @JoinColumn()
   roles: Role[];
 
   @ManyToMany(() => Company, (company) => company.users)
+  @JoinTable()
   company: Company;
 
   @CreateDateColumn()
