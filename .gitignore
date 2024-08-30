@@ -1,2 +1,4 @@
+.turbo/daemon/.log
 node_modules
-.turbo/daemon/*.log*
+/dist
+.env

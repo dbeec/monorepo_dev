@@ -1,13 +1,13 @@
 import { Company } from 'src/modules/companies/entities/company.entity';
+import { DocumentType } from 'src/modules/document-types/entities/document-type.entity';
 import { Role } from 'src/modules/roles/entities/role.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,8 +17,10 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   userId: string;
 
-  @Column()
-  document_type: string;
+  @ManyToOne(() => DocumentType, (documentType) => documentType.users)
+  @JoinColumn({name: 'documentTypeId'})
+  typeDocument: DocumentType
+
 
   @Column({ unique: true })
   document: string;
@@ -44,19 +46,23 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Role, (role) => role.user)
-  roles: Role[];
+  @Column({default: true})
+  isActive: boolean;
 
-  @ManyToMany(() => Company, (company) => company.users)
-  @JoinTable()
+  @ManyToOne(() => Role, (role) => role.user, { eager: true })
+  @JoinColumn({ name: 'roleId' })
+  roles: Role;
+
+  @ManyToOne(() => Company, (company) => company.users, { eager: true })
+  @JoinColumn({ name: 'companyId' })
   company: Company;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
   @DeleteDateColumn()
-  deleted_at: Date;
+  deletedAt: Date;
 }

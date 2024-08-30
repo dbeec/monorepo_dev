@@ -11,21 +11,27 @@ import {
 
 @Entity()
 export class Company {
-  @PrimaryGeneratedColumn()
-  companyId: number;
+  @PrimaryGeneratedColumn('uuid')
+  companyId: string;
 
   @Column({ unique: true })
-  name_company: string;
+  nit: string;
 
-  @OneToMany(() => User, (user) => user.company)
-  users: User[];
+  @Column({ unique: true })
+  name: string;
 
+  @Column({ default: true })
+  isActive: boolean;
+  
   @CreateDateColumn()
-  created_at: Date;
-
+  createdAt: Date;
+  
   @UpdateDateColumn()
-  updated_at: Date;
-
+  updatedAt: Date;
+  
   @DeleteDateColumn()
-  deleted_at: Date;
+  deletedAt: Date;
+
+  @OneToMany(() => User, (users) => users.company)
+  users: User[];
 }
