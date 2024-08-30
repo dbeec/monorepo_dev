@@ -1,7 +1,9 @@
+import { User } from 'src/modules/users/entities/user.entity';
 export declare class DocumentType {
-    dtId: number;
-    name_document: string;
-    created_at: Date;
-    updated_at: Date;
-    deleted_at: Date;
+    document_typeId: number;
+    type: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
+    users: User[];
 }

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocumentType = void 0;
+const user_entity_1 = require("../../users/entities/user.entity");
 const typeorm_1 = require("typeorm");
 let DocumentType = class DocumentType {
 };
@@ -17,23 +18,27 @@ exports.DocumentType = DocumentType;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], DocumentType.prototype, "dtId", void 0);
+], DocumentType.prototype, "document_typeId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], DocumentType.prototype, "name_document", void 0);
+], DocumentType.prototype, "type", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], DocumentType.prototype, "created_at", void 0);
+], DocumentType.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], DocumentType.prototype, "updated_at", void 0);
+], DocumentType.prototype, "updatedAt", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], DocumentType.prototype, "deleted_at", void 0);
+], DocumentType.prototype, "deletedAt", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => user_entity_1.User, (users) => users.typeDocument),
+    __metadata("design:type", Array)
+], DocumentType.prototype, "users", void 0);
 exports.DocumentType = DocumentType = __decorate([
     (0, typeorm_1.Entity)()
 ], DocumentType);

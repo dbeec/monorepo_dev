@@ -1,9 +1,11 @@
 import { User } from 'src/modules/users/entities/user.entity';
 export declare class Company {
-    companyId: number;
-    name_company: string;
+    companyId: string;
+    nit: string;
+    name: string;
+    isActive: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
     users: User[];
-    created_at: Date;
-    updated_at: Date;
-    deleted_at: Date;
 }

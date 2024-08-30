@@ -22,23 +22,23 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], Role.prototype, "name_rol", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.roles),
-    __metadata("design:type", user_entity_1.User)
-], Role.prototype, "user", void 0);
+], Role.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Role.prototype, "created_at", void 0);
+], Role.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Role.prototype, "updated_at", void 0);
+], Role.prototype, "updatedAt", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], Role.prototype, "deleted_at", void 0);
+], Role.prototype, "deletedAt", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => user_entity_1.User, (user) => user.roles),
+    __metadata("design:type", Array)
+], Role.prototype, "user", void 0);
 exports.Role = Role = __decorate([
     (0, typeorm_1.Entity)()
 ], Role);

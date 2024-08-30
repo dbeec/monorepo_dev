@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,17 +15,17 @@ export class Role {
   roleId: number;
 
   @Column({ unique: true })
-  name_rol: string;
-
-  @ManyToOne(() => User, (user) => user.roles)
-  user: User;
-
+  name: string;
+  
   @CreateDateColumn()
-  created_at: Date;
-
+  createdAt: Date;
+  
   @UpdateDateColumn()
-  updated_at: Date;
-
+  updatedAt: Date;
+  
   @DeleteDateColumn()
-  deleted_at: Date;
+  deletedAt: Date;
+
+  @OneToMany(() => User, (user) => user.roles)
+  user: User[];
 }

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const company_entity_1 = require("../../companies/entities/company.entity");
+const document_type_entity_1 = require("../../document-types/entities/document-type.entity");
 const role_entity_1 = require("../../roles/entities/role.entity");
 const typeorm_1 = require("typeorm");
 let User = class User {
@@ -21,9 +22,10 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "document_type", void 0);
+    (0, typeorm_1.ManyToOne)(() => document_type_entity_1.DocumentType, (documentType) => documentType.users),
+    (0, typeorm_1.JoinColumn)({ name: 'documentTypeId' }),
+    __metadata("design:type", document_type_entity_1.DocumentType)
+], User.prototype, "typeDocument", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
@@ -57,26 +59,31 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => role_entity_1.Role, (role) => role.user),
-    __metadata("design:type", Array)
+    (0, typeorm_1.Column)({ default: true }),
+    __metadata("design:type", Boolean)
+], User.prototype, "isActive", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => role_entity_1.Role, (role) => role.user, { eager: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'roleId' }),
+    __metadata("design:type", role_entity_1.Role)
 ], User.prototype, "roles", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => company_entity_1.Company, (company) => company.users),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, (company) => company.users, { eager: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'companyId' }),
     __metadata("design:type", company_entity_1.Company)
 ], User.prototype, "company", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "created_at", void 0);
+], User.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "updated_at", void 0);
+], User.prototype, "updatedAt", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], User.prototype, "deleted_at", void 0);
+], User.prototype, "deletedAt", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
