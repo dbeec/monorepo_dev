@@ -38,7 +38,6 @@ export default function MainTable() {
             {
               field: "id",
               headerName: "NO.",
-              // width: 50,
               flex: 0.5,
               align: "center",
               ...defaultColumnOptions,
