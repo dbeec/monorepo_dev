@@ -16,13 +16,13 @@ export class Role {
 
   @Column({ unique: true })
   name: string;
-  
+
   @CreateDateColumn()
   createdAt: Date;
-  
+
   @UpdateDateColumn()
   updatedAt: Date;
-  
+
   @DeleteDateColumn()
   deletedAt: Date;
 

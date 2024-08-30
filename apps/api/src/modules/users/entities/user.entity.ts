@@ -17,10 +17,11 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   userId: string;
 
-  @ManyToOne(() => DocumentType, (documentType) => documentType.users)
-  @JoinColumn({name: 'documentTypeId'})
-  typeDocument: DocumentType
-
+  @ManyToOne(() => DocumentType, (documentType) => documentType.users, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'documentTypeId' })
+  typeDocument: DocumentType;
 
   @Column({ unique: true })
   document: string;
@@ -46,7 +47,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({default: true})
+  @Column({ default: true })
   isActive: boolean;
 
   @ManyToOne(() => Role, (role) => role.user, { eager: true })
