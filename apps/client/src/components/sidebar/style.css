@@ -1,6 +1,92 @@
 .main_sidebar {
-  background: #405D72;
+  background: #405d72;
   width: 18%;
-  height: 100%;
-  padding: 0 20px;
+  height: 100vh;
+  padding: 0 0.4rem;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    display: block;
+    width: 100%;
+    z-index: 7;
+  }
+}
+
+.logo_sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 9%;
+}
+
+.logo_sidebar h1 {
+  font-size: 1rem;
+}
+
+.list_sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.content_li {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.module {
+  display: flex;
+  padding: 0.3rem 0.4rem;
+  color: #fff;
+  font-size: 0.9rem;
+  justify-content: space-between;
+  border-radius: 3px;
+  transition:
+    background 0.2s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.module:hover {
+  background: #456983;
+}
+
+.redirect {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.expanded_icon {
+  display: flex;
+  align-items: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.8rem;
+  margin-left: 2rem;
+  gap: 0.2rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+}
+
+.options.expanded {
+  max-height: 500px; /* Ajusta este valor si tienes más contenido */
+}
+
+.options .prueba {
+  color: #fff;
+  font-weight: 300;
+}
+
+.options .prueba:hover {
+  color: rgb(231, 180, 10);
+  transition: color 0.2s ease-in-out;
 }

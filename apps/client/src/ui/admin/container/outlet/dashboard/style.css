@@ -4,6 +4,13 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
+
+  @media(max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .card {
@@ -14,6 +21,10 @@
   height: 100px;
   padding: 0.9rem;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 3px;
+
+  @media(max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .icon {
@@ -23,7 +34,7 @@
 }
 
 .card_content span {
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 .card_content p {
@@ -33,7 +44,27 @@
 /* BLOQUE DE LA TABLA */
 
 .table_container {
-  /* background: #fff; */
+  background: #fff;
   width: 100%;
   height: auto;
+}
+
+/* ESTILOS DE TABLA EN DASHBOARD */
+
+.main-table {
+  display: grid;
+}
+
+.column-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  height: 100%;
+}
+
+.tolbars {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem;
 }

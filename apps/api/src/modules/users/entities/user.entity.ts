@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,13 +14,13 @@ import {
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  userId: number;
+  @PrimaryGeneratedColumn('uuid')
+  userId: string;
 
   @Column()
   document_type: string;
 
-  @Column()
+  @Column({ unique: true })
   document: string;
 
   @Column()
@@ -31,7 +32,7 @@ export class User {
   @Column()
   firstsurname: string;
 
-  @Column()
+  @Column({ nullable: true })
   secondsurname: string;
 
   @Column({ unique: true })
@@ -47,6 +48,7 @@ export class User {
   roles: Role[];
 
   @ManyToMany(() => Company, (company) => company.users)
+  @JoinTable()
   company: Company;
 
   @CreateDateColumn()
