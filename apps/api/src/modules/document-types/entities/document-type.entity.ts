@@ -1,26 +1,35 @@
+import { User } from 'src/modules/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+
+  OneToMany,
+
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+
+
 @Entity()
 export class DocumentType {
   @PrimaryGeneratedColumn()
-  dtId: number;
+  document_typeId: number;
 
   @Column()
-  name_document: string;
+  type: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
   @DeleteDateColumn()
-  deleted_at: Date;
+  deletedAt: Date;
+
+  @OneToMany(() => User, (users) => users.typeDocument)
+  users: User[];
 }
