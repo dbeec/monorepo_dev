@@ -22,13 +22,13 @@ export class Company {
 
   @Column({ default: true })
   isActive: boolean;
-  
+
   @CreateDateColumn()
   createdAt: Date;
-  
+
   @UpdateDateColumn()
   updatedAt: Date;
-  
+
   @DeleteDateColumn()
   deletedAt: Date;
 
