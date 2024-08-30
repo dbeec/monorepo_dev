@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./style.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 
 export default function Sidebar() {
@@ -20,21 +21,31 @@ export default function Sidebar() {
 
         <div className="list_sidebar">
           <li className="content_li" onClick={isToggle}>
-            <div className="content_options">
+            <div className="module">
               <div className="redirect">
                 <DashboardIcon />
                 Dashboard
               </div>
 
               <div className="expanded_icon">
-                <ArrowForwardIosIcon style={{ fontSize: "1rem" }} />
+                {expanded ? (
+                  <RemoveIcon style={{ fontSize: "1rem" }} />
+                ) : (
+                  <AddIcon style={{ fontSize: "1rem" }} />
+                )}
               </div>
             </div>
-            {expanded && (
-              <div className="hover">
-                <Link to="/dashboard">Numero 1</Link>
-              </div>
-            )}
+            <div className={`options ${expanded ? "expanded" : ""}`}>
+              <Link to="/dashboard" className="prueba">
+                Lista de usuarios
+              </Link>
+              <Link to="/dashboard" className="prueba">
+                Registro de usuarios
+              </Link>
+              <Link to="/dashboard" className="prueba">
+                Ver reportes
+              </Link>
+            </div>
           </li>
         </div>
       </div>
