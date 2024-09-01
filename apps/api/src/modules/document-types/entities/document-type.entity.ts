@@ -14,7 +14,7 @@ export class DocumentType {
   @PrimaryGeneratedColumn()
   document_typeId: number;
 
-  @Column()
+  @Column({length: 5})
   type: string;
 
   @CreateDateColumn()

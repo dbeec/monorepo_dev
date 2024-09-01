@@ -29,7 +29,7 @@ import { DocumentTypesModule } from './modules/document-types/document-types.mod
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
     UsersModule,
     RolesModule,

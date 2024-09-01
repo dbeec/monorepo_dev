@@ -1,26 +1,79 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDocumentTypeDto } from './dto/create-document-type.dto';
 import { UpdateDocumentTypeDto } from './dto/update-document-type.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DocumentType } from './entities/document-type.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DocumentTypesService {
-  create(createDocumentTypeDto: CreateDocumentTypeDto) {
-    return 'This action adds a new documentType';
+  constructor(
+    @InjectRepository(DocumentType)
+    private readonly documentTypeRepository: Repository<DocumentType>
+  ) { }
+  async create(createDocumentTypeDto: CreateDocumentTypeDto) {
+    try {
+      const documentType = await this.documentTypeRepository.findOneBy({ type: createDocumentTypeDto.type })
+      if (documentType) {
+        throw new ConflictException("Document Type already exists")
+      }
+      this.documentTypeRepository.create(createDocumentTypeDto)
+      return await this.documentTypeRepository.save(createDocumentTypeDto)
+    } catch (error) {
+      console.error("Error creating document type:", error)
+      throw error
+    }
   }
 
-  findAll() {
-    return `This action returns all documentTypes`;
+  async findAll() {
+    try {
+      return await this.documentTypeRepository.find()
+    } catch (error) {
+      console.error("Error finding document type:", error)
+      throw error
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} documentType`;
+  async findOne(id: number) {
+    try {
+      const documentType = await this.documentTypeRepository.findOneBy({ document_typeId: id })
+      if (!documentType) {
+        throw new NotFoundException(`Document Type ${id} not found`)
+      }
+      return documentType
+    } catch (error) {
+      console.error("Error finding document type:", error)
+      throw error
+    }
   }
 
-  update(id: number, updateDocumentTypeDto: UpdateDocumentTypeDto) {
-    return `This action updates a #${id} documentType`;
+  async update(id: number, updateDocumentTypeDto: UpdateDocumentTypeDto) {
+    try {
+      const existDocumentType = await this.documentTypeRepository.findOneBy({ document_typeId: id })
+      if (!existDocumentType) {
+        throw new NotFoundException(`Document Type ${id} not found`)
+      }
+      const documentType = await this.documentTypeRepository.findOneBy({ type: updateDocumentTypeDto.type })
+      if (documentType) {
+        throw new ConflictException("Document Type already exists")
+      }
+      return await this.documentTypeRepository.update(id, updateDocumentTypeDto)
+    } catch (error) {
+      console.error("Error updating document type:", error)
+      throw error
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} documentType`;
+  async remove(id: number) {
+    try {
+      const existDocumentType = await this.documentTypeRepository.findOneBy({ document_typeId: id })
+      if (!existDocumentType) {
+        throw new NotFoundException(`Document Type ${id} not found`)
+      }
+      return await this.documentTypeRepository.softDelete(id)
+    } catch (error) {
+      console.error("Error deleting document type:", error)
+      throw error
+    }
   }
 }
