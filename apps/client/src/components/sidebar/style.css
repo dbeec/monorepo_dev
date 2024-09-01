@@ -1,15 +1,23 @@
-.main_sidebar {
+.content_sidebar {
   background: #405d72;
-  width: 18%;
+  width: 250px;
   height: 100vh;
-  padding: 0 0.4rem;
+  padding: 2px;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  transition: width 0.1s ease;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     position: absolute;
-    display: block;
+    display: none;
     width: 100%;
     z-index: 7;
   }
+}
+
+.content_sidebar.collapsed {
+  width: 3%;
 }
 
 .logo_sidebar {
@@ -25,68 +33,55 @@
   font-size: 1rem;
 }
 
-.list_sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.content_li {
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-.module {
-  display: flex;
-  padding: 0.3rem 0.4rem;
+#content_accordion {
+  background: transparent;
   color: #fff;
-  font-size: 0.9rem;
-  justify-content: space-between;
-  border-radius: 3px;
+  box-shadow: none;
+}
+
+/* CLASE DE MATERIAL UI */
+.MuiAccordionSummary-content.css-1betqn-MuiAccordionSummary-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 7px 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#accordion_summary {
+  font-size: 0.8rem;
+  font-weight: 400;
+  padding: 0 6px;
+  min-height: unset;
   transition:
     background 0.2s ease-in-out,
     color 0.3s ease-in-out;
 }
 
-.module:hover {
+#accordion_summary:hover {
   background: #456983;
 }
 
-.redirect {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.expanded_icon {
-  display: flex;
-  align-items: center;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  padding: 0.3rem 0.4rem;
-  font-size: 0.8rem;
-  margin-left: 2rem;
-  gap: 0.2rem;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-in-out;
-}
-
-.options.expanded {
-  max-height: 500px; /* Ajusta este valor si tienes más contenido */
-}
-
-.options .prueba {
+#accordion_details {
   color: #fff;
-  font-weight: 300;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border-radius: 2px;
+  padding: 0.3rem 0.8rem 0.3rem 2.3rem;
+  cursor: pointer;
+  transition:
+    background 0.2s ease-in-out,
+    color 0.3s ease-in-out;
 }
 
-.options .prueba:hover {
-  color: rgb(231, 180, 10);
-  transition: color 0.2s ease-in-out;
+#accordion_details:hover {
+  color: rgb(255, 174, 0);
 }
+
+/* .content_sidebar.collapsed .accordion_summary_text {
+  display: none;
+}
+
+.content_sidebar.collapsed .MuiAccordionSummary-expandIcon {
+  display: none;
+} */

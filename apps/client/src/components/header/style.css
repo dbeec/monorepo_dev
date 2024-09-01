@@ -12,3 +12,22 @@
     rgba(0, 0, 0, 0.05) 0px 0px 0px -2px;
   z-index: 1;
 }
+
+.data_header {
+  display: inherit;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon_header {
+  display: inherit;
+  align-items: center;
+  cursor: pointer;
+  transition:
+    background 0.1s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.icon_header:hover {
+  color: #405d72;
+}
