@@ -3,7 +3,8 @@
 .cards_container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  padding: .5rem 0;
 
   @media(max-width: 768px) {
     display: flex;
