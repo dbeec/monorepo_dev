@@ -1,10 +1,10 @@
-// import LogoCoophumana from "../../../public/logo_web.png";
+import LogoCoophumana from "../../../public/logo_web.png";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -24,6 +24,7 @@ const schema = yup
   .required();
 
 export default function Login() {
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -31,17 +32,20 @@ export default function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(() => {
     reset();
   });
+
+  const handleClick = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <>
       <div className="main__content">
         <div className="login">
           <div className="logo">
-            {/* <img src={LogoCoophumana} alt="LogoCoophumana" /> */}
+            <img src={LogoCoophumana} alt="LogoCoophumana" />
 
             <h1>Bienvenid@</h1>
             <p>
@@ -105,11 +109,11 @@ export default function Login() {
               }}
             />
 
-            <Link to="/dashboard">
-              <button className="button" type="submit">
+            <div className="button">
+              <button type="submit" onClick={() => handleClick()}>
                 Iniciar sesión
               </button>
-            </Link>
+            </div>
           </form>
         </div>
       </div>

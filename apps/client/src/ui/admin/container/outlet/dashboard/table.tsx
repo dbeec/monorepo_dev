@@ -1,14 +1,16 @@
-import "./style.css";
+import * as React from "react";
+import Box from "@mui/material/Box";
 import {
   DataGrid,
   GridColDef,
-  GridRenderCellParams,
   GridToolbarExport,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
+import axios from "axios";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import "./style.css";
 
 const defaultColumnOptions: Partial<GridColDef> = {
   sortable: false,
@@ -18,174 +20,132 @@ const defaultColumnOptions: Partial<GridColDef> = {
 };
 
 export default function MainTable() {
-  const handleEdit = (id: number) => {
-    console.log("Edit", id);
+  const [data, setData] = React.useState([]);
+
+  /**
+   * Traer los datos de la bd.
+   */
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:4005/api/users");
+      const usersWithId = response.data.users.map((user: any) => ({
+        ...user,
+        id: user.userId,
+        fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
+      }));
+      setData(usersWithId);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
-  const handleView = (id: number) => {
-    console.log("View", id);
-  };
+  /**
+   * useEffect que ejecuta la funcion fetchData
+   */
+  React.useEffect(() => {
+    fetchData();
+  }, []);
 
-  const handleDelete = (id: number) => {
-    console.log("Delete", id);
-  };
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "NO.", flex: 0.5 },
+    {
+      field: "typeDocument",
+      headerName: "TIPO DOC",
+      flex: 0.5,
+      align: "center",
+      ...defaultColumnOptions,
+    },
+    {
+      field: "document",
+      headerName: "NO. DOCUMENTO",
+      flex: 1,
+      align: "right",
+      ...defaultColumnOptions,
+    },
+    {
+      field: "fullname",
+      headerName: "NOMBRE COMPLETO",
+      align: "left",
+      ...defaultColumnOptions,
+    },
+    {
+      field: "company",
+      headerName: "EMPRESA",
+      flex: 1,
+      align: "center",
+      ...defaultColumnOptions,
+    },
+    {
+      field: "roles",
+      headerName: "CARGO",
+      flex: 1.5,
+      align: "center",
+      ...defaultColumnOptions,
+    },
+    {
+      field: "actions",
+      headerName: "ACCIÓN",
+      flex: 1,
+      ...defaultColumnOptions,
+      renderCell: () => (
+        <div className="column-buttons">
+          <VisibilityOutlinedIcon
+            style={{
+              cursor: "pointer",
+              color: "#1976d2",
+              fontSize: "1.2rem",
+            }}
+          />
+          <EditOutlinedIcon
+            style={{
+              cursor: "pointer",
+              color: "#ffa000",
+              fontSize: "1.2rem",
+            }}
+          />
+          <DeleteOutlineOutlinedIcon
+            style={{
+              cursor: "pointer",
+              color: "#d32f2f",
+              fontSize: "1.2rem",
+            }}
+          />
+        </div>
+      ),
+    },
+  ];
+
   return (
-    <>
-      <div className="main-table">
-        <DataGrid
-          checkboxSelection
-          columns={[
-            {
-              field: "id",
-              headerName: "NO.",
-              flex: 0.5,
-              align: "center",
-              ...defaultColumnOptions,
+    <Box sx={{ display: "grid", width: "100%", bgcolor: "#fff" }}>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
             },
-            {
-              field: "document_type",
-              headerName: "TIPO DOC",
-              flex: 0.5,
-              align: "center",
-              ...defaultColumnOptions,
-            },
-            {
-              field: "document",
-              headerName: "NO. DOCUMENTO",
-              flex: 1,
-              align: "right",
-              ...defaultColumnOptions,
-            },
-            {
-              field: "name",
-              headerName: "NOMBRE COMPLETO",
-              flex: 1.5,
-              align: "left",
-              // valueGetter: (params) => {
-              //   return `${params.firstsurname || ""} ${params.secondsurname || ""} ${params.firstname || ""} ${params.middlename}`;
-              // },
-              ...defaultColumnOptions,
-            },
-            {
-              field: "company",
-              headerName: "EMPRESA",
-              flex: 1,
-              align: "center",
-              ...defaultColumnOptions,
-            },
-            {
-              field: "role",
-              headerName: "CARGO",
-              flex: 1.5,
-              align: "center",
-              ...defaultColumnOptions,
-            },
-            {
-              field: "h_entrada",
-              headerName: "HORA ENTRADA",
-              flex: 1.2,
-              align: "center",
-              ...defaultColumnOptions,
-            },
-            {
-              field: "h_salida",
-              headerName: "HORA SALIDA",
-              flex: 1,
-              align: "center",
-              ...defaultColumnOptions,
-            },
-            {
-              field: "actions",
-              headerName: "ACCIÓN",
-              flex: 1,
-              ...defaultColumnOptions,
-              renderCell: (params: GridRenderCellParams<any, any>) => (
-                <div className="column-buttons">
-                  <VisibilityOutlinedIcon
-                    onClick={() => handleView(Number(params.id))}
-                    style={{
-                      cursor: "pointer",
-                      color: "#1976d2",
-                      fontSize: "1.2rem",
-                    }}
-                  />
-                  <EditOutlinedIcon
-                    onClick={() => handleEdit(Number(params.id))}
-                    style={{
-                      cursor: "pointer",
-                      color: "#ffa000",
-                      fontSize: "1.2rem",
-                    }}
-                  />
-                  <DeleteOutlineOutlinedIcon
-                    onClick={() => handleDelete(Number(params.id))}
-                    style={{
-                      cursor: "pointer",
-                      color: "#d32f2f",
-                      fontSize: "1.2rem",
-                    }}
-                  />
-                </div>
-              ),
-            },
-          ]}
-          rows={[
-            // aqui se debe colocar el estado que guarda la data de la bd
-            {
-              id: 1,
-              document_type: "CC",
-              document: 1143168571,
-              name: "DÍAZ QUINTERO JOHAN DAVID",
-              company: "CAE",
-              role: "PROJECT MANAGER",
-              h_entrada: "08:01",
-              h_salida: "05:21",
-            },
-            {
-              id: 2,
-              document_type: "CC",
-              document: 1002029388,
-              name: "CORCHO CARRANZA ELIZABETH DANIELA",
-              company: "WOW",
-              role: "DEVELOPER",
-              h_entrada: "08:01",
-              h_salida: "05:21",
-            },
-            {
-              id: 3,
-              document_type: "CC",
-              document: 8743306,
-              name: "GALVIS SMITH SERGIO ANDRES",
-              company: "WOW",
-              role: "DEVELOPER",
-              h_entrada: "08:01",
-              h_salida: "05:21",
-            },
-          ]}
-          slots={{
-            toolbar: () => (
-              <>
-                <div className="tolbars">
-                  <GridToolbarExport />
-                  <GridToolbarQuickFilter
-                    placeholder="No. documento"
-                    size="small"
-                    sx={{ width: "20%" }}
-                  />
-                </div>
-              </>
-            ),
-          }}
-          initialState={{
-            density: "compact",
-          }}
-          slotProps={{
-            toolbar: {
-              showQuickFilter: true,
-            },
-          }}
-        />
-      </div>
-    </>
+          },
+        }}
+        slots={{
+          toolbar: () => (
+            <>
+              <div className="tolbars">
+                <GridToolbarExport />
+                <GridToolbarQuickFilter
+                  placeholder="No. documento"
+                  size="small"
+                  sx={{ width: "20%" }}
+                />
+              </div>
+            </>
+          ),
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+        density="compact"
+      />
+    </Box>
   );
 }

@@ -18,8 +18,8 @@ html {
 }
 
 body {
-  -webkit-user-select: none;
-  user-select: none;
+  /* -webkit-user-select: none;
+  user-select: none; */
   font-family: "poppins", sans-serif;
 }
 

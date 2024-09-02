@@ -8,12 +8,13 @@ import { RolesModule } from '../roles/roles.module';
 import { CompaniesModule } from '../companies/companies.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]),
+  imports: [
+    TypeOrmModule.forFeature([User]),
     DocumentTypesModule,
     RolesModule,
-    CompaniesModule
+    CompaniesModule,
   ],
   controllers: [UsersController],
   providers: [UsersService],
 })
-export class UsersModule { }
+export class UsersModule {}
