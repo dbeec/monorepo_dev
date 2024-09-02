@@ -5,8 +5,25 @@ import BusinessIcon from "@mui/icons-material/Business";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import MainTable from "./table";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function AdminContent() {
+  const [totalPersonal, setTotalPersonal] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchTotalPersonal = async () => {
+      try {
+        const response = await axios.get("http://localhost:4005/api/users");
+        const totalUsers = response.data.users.length;
+        setTotalPersonal(totalUsers);
+      } catch (error) {
+        console.error("Error al traer los datos: ", error);
+      }
+    };
+
+    fetchTotalPersonal();
+  }, []);
   return (
     <>
       <TitleViews
@@ -21,7 +38,7 @@ export default function AdminContent() {
           </div>
           <div className="card_content">
             <span>Total personal</span>
-            <p>90</p>
+            <p>{totalPersonal !== null ? totalPersonal : "Cargando..."}</p>{" "}
           </div>
         </div>
 

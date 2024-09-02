@@ -47,45 +47,46 @@ export default function MainTable() {
   }, []);
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "NO.", flex: 0.5 },
+    { field: "id", headerName: "NO.", flex: 0.2 },
     {
       field: "typeDocument",
       headerName: "TIPO DOC",
-      flex: 0.5,
+      flex: 0.15,
       align: "center",
       ...defaultColumnOptions,
     },
     {
       field: "document",
       headerName: "NO. DOCUMENTO",
-      flex: 1,
+      flex: 0.3,
       align: "right",
       ...defaultColumnOptions,
     },
     {
       field: "fullname",
       headerName: "NOMBRE COMPLETO",
+      flex: 0.6,
       align: "left",
       ...defaultColumnOptions,
     },
     {
       field: "company",
       headerName: "EMPRESA",
-      flex: 1,
+      flex: 0.35,
       align: "center",
       ...defaultColumnOptions,
     },
     {
       field: "roles",
       headerName: "CARGO",
-      flex: 1.5,
+      flex: 0.35,
       align: "center",
       ...defaultColumnOptions,
     },
     {
       field: "actions",
       headerName: "ACCIÓN",
-      flex: 1,
+      flex: 0.3,
       ...defaultColumnOptions,
       renderCell: () => (
         <div className="column-buttons">
