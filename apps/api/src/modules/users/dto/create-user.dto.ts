@@ -35,6 +35,6 @@ export class CreateUserDto {
   @IsNumber()
   roles: number;
 
-  @IsString()
-  company: string;
+  @IsNumber()
+  company: number;
 }

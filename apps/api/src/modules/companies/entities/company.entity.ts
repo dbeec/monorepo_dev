@@ -11,8 +11,8 @@ import {
 
 @Entity()
 export class Company {
-  @PrimaryGeneratedColumn('uuid')
-  companyId: string;
+  @PrimaryGeneratedColumn()
+  companyId: number;
 
   @Column({ unique: true })
   nit: string;
@@ -20,7 +20,7 @@ export class Company {
   @Column({ unique: true })
   name: string;
 
-  @Column({ default: true })
+  @Column({ default: true, })
   isActive: boolean;
 
   @CreateDateColumn()
