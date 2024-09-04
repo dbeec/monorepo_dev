@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateDocumentTypeDto } from './dto/create-document-type.dto';
 import { UpdateDocumentTypeDto } from './dto/update-document-type.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,8 +13,8 @@ import { Repository } from 'typeorm';
 export class DocumentTypesService {
   constructor(
     @InjectRepository(DocumentType)
-    private readonly documentTypeRepository: Repository<DocumentType>
-  ) { }
+    private readonly documentTypeRepository: Repository<DocumentType>,
+  ) {}
   async create(createDocumentTypeDto: CreateDocumentTypeDto) {
     const documentType = await this.documentTypeRepository.findOneBy({ type: createDocumentTypeDto.type })
     if (documentType) {

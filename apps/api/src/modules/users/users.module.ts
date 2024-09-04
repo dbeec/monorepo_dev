@@ -9,12 +9,13 @@ import { CompaniesModule } from '../companies/companies.module';
 import { ValidationService } from './services/validation.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]),
+  imports: [
+    TypeOrmModule.forFeature([User]),
     DocumentTypesModule,
     RolesModule,
-    CompaniesModule
+    CompaniesModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, ValidationService],
 })
-export class UsersModule { }
+export class UsersModule {}

@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,8 +13,8 @@ import { Role } from './entities/role.entity';
 export class RolesService {
   constructor(
     @InjectRepository(Role)
-    private readonly rolesRepository: Repository<Role>
-  ) { }
+    private readonly rolesRepository: Repository<Role>,
+  ) {}
   async create(createRoleDto: CreateRoleDto) {
     const existRole = await this.rolesRepository.findOneBy({ name: createRoleDto.name })
     if (existRole) {

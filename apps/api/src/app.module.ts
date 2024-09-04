@@ -34,8 +34,7 @@ import { DocumentTypesModule } from './modules/document-types/document-types.mod
     UsersModule,
     RolesModule,
     CompaniesModule,
-    DocumentTypesModule
-
+    DocumentTypesModule,
   ],
   controllers: [],
   providers: [],
