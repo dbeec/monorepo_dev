@@ -1,4 +1,4 @@
-import LogoCoophumana from "../../../public/logo_web.png";
+// import LogoCoophumana from "../../../public/logo_web.png";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,7 +45,7 @@ export default function Login() {
       <div className="main__content">
         <div className="login">
           <div className="logo">
-            <img src={LogoCoophumana} alt="LogoCoophumana" />
+            {/* <img src={LogoCoophumana} alt="LogoCoophumana" /> */}
 
             <h1>Bienvenid@</h1>
             <p>
