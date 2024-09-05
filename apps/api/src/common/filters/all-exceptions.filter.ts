@@ -23,8 +23,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException
         ? exception.getResponse()
-        : 'Internal Server Error';
-
+        : 'Internal Server Error'
+    console.error(exception)
     response.status(status).json({
       statusCode: status,
       timestamp: new Date().toUTCString(),

@@ -6,7 +6,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { User } from '../entities/user.entity';
 import { hashPassword } from 'src/shared';
-import { ValidationService } from './validation.service';
+import { AdditionalServices } from './additionals.service';
 import { mapUserToResponse } from './mapping/user.mapper';
 
 @Injectable()
@@ -14,19 +14,19 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly validationService: ValidationService,
+    private readonly AdditionalServices: AdditionalServices,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    await this.validationService.validateDocumentExists(createUserDto.document);
-    await this.validationService.validateEmailExists(createUserDto.email);
+    await this.AdditionalServices.validateDocumentExists(createUserDto.document);
+    await this.AdditionalServices.validateEmailExists(createUserDto.email);
     const documentType =
-      await this.validationService.validateDocumentTypeExists(
+      await this.AdditionalServices.validateDocumentTypeExists(
         createUserDto.typeDocument,
       );
-    const role = await this.validationService.validateRoleExists(
+    const role = await this.AdditionalServices.validateRoleExists(
       createUserDto.roles,
     );
-    const company = await this.validationService.validateCompanyExists(
+    const company = await this.AdditionalServices.validateCompanyExists(
       createUserDto.company,
     );
 
@@ -45,22 +45,22 @@ export class UsersService {
   }
 
   async findAll() {
-    const [user] = await this.userRepository.find();
-    return mapUserToResponse(user);
+    const user = await this.userRepository.find();
+    return user.map((user) => mapUserToResponse(user));
   }
 
   async findOne(id: string) {
-    const user = await this.validationService.validateUserExists(id);
+    const user = await this.AdditionalServices.validateUserExists(id);
     return mapUserToResponse(user);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    await this.validationService.validateUserExists(id);
+    await this.AdditionalServices.validateUserExists(id);
     if (updateUserDto.email) {
-      await this.validationService.validateEmailExists(updateUserDto.email);
+      await this.AdditionalServices.validateEmailExists(updateUserDto.email);
     }
     if (updateUserDto.document) {
-      await this.validationService.validateDocumentExists(
+      await this.AdditionalServices.validateDocumentExists(
         updateUserDto.document,
       );
     }
@@ -69,13 +69,13 @@ export class UsersService {
       updateUserDto.password = hashedPassword;
     }
     const documentType =
-      await this.validationService.validateDocumentTypeExists(
+      await this.AdditionalServices.validateDocumentTypeExists(
         updateUserDto.typeDocument,
       );
-    const roles = await this.validationService.validateRoleExists(
+    const roles = await this.AdditionalServices.validateRoleExists(
       updateUserDto.roles,
     );
-    const company = await this.validationService.validateCompanyExists(
+    const company = await this.AdditionalServices.validateCompanyExists(
       updateUserDto.company,
     );
 
@@ -90,10 +90,14 @@ export class UsersService {
   }
 
   async remove(id: string) {
-    const user = await this.validationService.validateUserExists(id);
+    const user = await this.AdditionalServices.validateUserExists(id);
     user.isActive = false;
     await this.userRepository.save(user);
     await this.userRepository.softDelete(id);
     return { message: 'Deleted' };
+  }
+
+  async AllUserCounts() {
+    return this.AdditionalServices.countUsers()
   }
 }

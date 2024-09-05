@@ -8,7 +8,7 @@ import { Role } from 'src/modules/roles/entities/role.entity';
 import { DocumentType } from 'src/modules/document-types/entities/document-type.entity';
 
 @Injectable()
-export class ValidationService {
+export class AdditionalServices {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -63,5 +63,10 @@ export class ValidationService {
       throw new NotFoundException('Invalid Company')
     }
     return company
+  }
+
+  async countUsers() {
+    const totalUsers = await this.userRepository.count();
+    return totalUsers;
   }
 } 
