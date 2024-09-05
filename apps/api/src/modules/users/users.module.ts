@@ -6,7 +6,7 @@ import { User } from './entities/user.entity';
 import { DocumentTypesModule } from '../document-types/document-types.module';
 import { RolesModule } from '../roles/roles.module';
 import { CompaniesModule } from '../companies/companies.module';
-import { ValidationService } from './services/validation.service';
+import { AdditionalServices } from './services/additionals.service';
 
 @Module({
   imports: [
@@ -16,6 +16,6 @@ import { ValidationService } from './services/validation.service';
     CompaniesModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, ValidationService],
+  providers: [UsersService, AdditionalServices],
 })
 export class UsersModule {}
