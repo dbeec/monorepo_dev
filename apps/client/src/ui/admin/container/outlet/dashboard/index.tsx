@@ -14,10 +14,10 @@ export default function AdminContent() {
   useEffect(() => {
     const fetchTotalPersonal = async () => {
       try {
-        const response = await axios.get("http://localhost:4005/api/users");
-        const totalUsers = response.data.length;
-        console.log("bd:",totalUsers)
-        setTotalPersonal(totalUsers);
+        const totalUsers = await axios.get(
+          "http://localhost:4005/api/users/all-counts"
+        );
+        setTotalPersonal(totalUsers.data);
       } catch (error) {
         console.error("Error al traer los datos: ", error);
       }

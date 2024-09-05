@@ -29,15 +29,12 @@ export default function MainTable() {
   const fetchData = async () => {
     try {
       const response = await axios.get("http://localhost:4005/api/users");
-      const users = response.data;
-      const usersWithId = [
-        {
-          ...users,
-          id: users.userId,
-          fullname: `${users.firstsurname} ${users.secondsurname ? users.secondsurname + " " : ""}${users.firstname} ${users.middlename ? users.middlename : ""}`,
-        },
-      ];
-      setData(usersWithId);
+      const users = response.data.map((user: UsersInterface) => ({
+        ...user,
+        id: String(user.id),
+        fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
+      }));
+      setData(users);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -51,7 +48,7 @@ export default function MainTable() {
   }, []);
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "NO.", flex: 0.2 },
+    { field: "userId", headerName: "NO.", flex: 0.2 },
     {
       field: "typeDocument",
       headerName: "TIPO DOC",
@@ -125,6 +122,7 @@ export default function MainTable() {
       <DataGrid
         rows={data}
         columns={columns}
+        getRowId={(row: { id: string }) => row.id}
         initialState={{
           pagination: {
             paginationModel: {

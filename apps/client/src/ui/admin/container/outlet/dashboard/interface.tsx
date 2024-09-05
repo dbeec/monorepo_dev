@@ -1,5 +1,5 @@
 export default interface UsersInterface {
-  userId: number;
+  id: string;
   firstname: string;
   middlename?: string;
   firstsurname: string;
