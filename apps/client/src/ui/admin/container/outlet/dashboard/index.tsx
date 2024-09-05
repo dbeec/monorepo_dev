@@ -11,6 +11,9 @@ import axios from "axios";
 export default function AdminContent() {
   const [totalPersonal, setTotalPersonal] = useState<number | null>(null);
 
+  /**
+   * useEffect para traer el numero total de usuarios registrados. (contador)
+   */
   useEffect(() => {
     const fetchTotalPersonal = async () => {
       try {
