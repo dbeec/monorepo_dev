@@ -1,1 +1,1 @@
-export { hashPassword } from "./utils/hash.utils";
+export { hashPassword } from './utils/hash.utils';

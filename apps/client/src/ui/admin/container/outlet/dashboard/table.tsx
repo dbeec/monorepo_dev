@@ -11,6 +11,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import "./style.css";
+import UsersInterface from "./interface";
 
 const defaultColumnOptions: Partial<GridColDef> = {
   sortable: false,
@@ -20,7 +21,7 @@ const defaultColumnOptions: Partial<GridColDef> = {
 };
 
 export default function MainTable() {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState<UsersInterface[]>([]);
 
   /**
    * Traer los datos de la bd.
@@ -28,11 +29,14 @@ export default function MainTable() {
   const fetchData = async () => {
     try {
       const response = await axios.get("http://localhost:4005/api/users");
-      const usersWithId = response.data.users.map((user: any) => ({
-        ...user,
-        id: user.userId,
-        fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
-      }));
+      const users = response.data;
+      const usersWithId = [
+        {
+          ...users,
+          id: users.userId,
+          fullname: `${users.firstsurname} ${users.secondsurname ? users.secondsurname + " " : ""}${users.firstname} ${users.middlename ? users.middlename : ""}`,
+        },
+      ];
       setData(usersWithId);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -77,7 +81,7 @@ export default function MainTable() {
       ...defaultColumnOptions,
     },
     {
-      field: "roles",
+      field: "role",
       headerName: "CARGO",
       flex: 0.35,
       align: "center",
@@ -150,3 +154,5 @@ export default function MainTable() {
     </Box>
   );
 }
+
+//

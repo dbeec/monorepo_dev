@@ -13,52 +13,62 @@ import { Repository } from 'typeorm';
 export class CompaniesService {
   constructor(
     @InjectRepository(Company)
-    private readonly companyRepository: Repository<Company>
-  ) { }
+    private readonly companyRepository: Repository<Company>,
+  ) {}
   async create(createCompanyDto: CreateCompanyDto) {
-    const existNit = await this.companyRepository.findOneBy({ nit: createCompanyDto.nit })
+    const existNit = await this.companyRepository.findOneBy({
+      nit: createCompanyDto.nit,
+    });
     if (existNit) {
-      throw new ConflictException("Nit already exists")
+      throw new ConflictException('Nit already exists');
     }
-    const existCompanyName = await this.companyRepository.findOneBy({ name: createCompanyDto.name })
+    const existCompanyName = await this.companyRepository.findOneBy({
+      name: createCompanyDto.name,
+    });
     if (existCompanyName) {
-      throw new ConflictException("Company name already exists")
+      throw new ConflictException('Company name already exists');
     }
     const newCompany = this.companyRepository.create(createCompanyDto);
     return await this.companyRepository.save(newCompany);
   }
 
   async findAll() {
-    return await this.companyRepository.find()
+    return await this.companyRepository.find();
   }
 
   async findOne(id: string) {
-    const existCompany = await this.companyRepository.findOneBy({ nit: id })
+    const existCompany = await this.companyRepository.findOneBy({ nit: id });
     if (!existCompany) {
-      throw new NotFoundException("Company not found")
+      throw new NotFoundException('Company not found');
     }
     return existCompany;
   }
 
   async update(id: number, updateCompanyDto: UpdateCompanyDto) {
-    const existCompany = await this.companyRepository.findOneBy({ companyId: id })
+    const existCompany = await this.companyRepository.findOneBy({
+      companyId: id,
+    });
     if (!existCompany) {
-      throw new NotFoundException("Company not found")
+      throw new NotFoundException('Company not found');
     }
-    const existName = await this.companyRepository.findOneBy({ name: updateCompanyDto.name })
+    const existName = await this.companyRepository.findOneBy({
+      name: updateCompanyDto.name,
+    });
     if (existName) {
-      throw new ConflictException("Company name already exists")
+      throw new ConflictException('Company name already exists');
     }
     return await this.companyRepository.update(id, updateCompanyDto);
   }
 
   async remove(id: number) {
-    const existCompany = await this.companyRepository.findOneBy({ companyId: id })
+    const existCompany = await this.companyRepository.findOneBy({
+      companyId: id,
+    });
     if (!existCompany) {
-      throw new NotFoundException("Company not found")
+      throw new NotFoundException('Company not found');
     }
-    existCompany.isActive = false
-    await this.companyRepository.save(existCompany)
+    existCompany.isActive = false;
+    await this.companyRepository.save(existCompany);
     return await this.companyRepository.softDelete(id);
   }
 }

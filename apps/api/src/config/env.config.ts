@@ -5,4 +5,4 @@ export const EnvConfigurations = () => ({
   dbPassword: process.env.DB_PASSWORD || '',
   dbPort: process.env.DB_PORT || 3306,
   dbName: process.env.DB_NAME || '',
-})
+});

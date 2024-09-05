@@ -15,7 +15,8 @@ export default function AdminContent() {
     const fetchTotalPersonal = async () => {
       try {
         const response = await axios.get("http://localhost:4005/api/users");
-        const totalUsers = response.data.users.length;
+        const totalUsers = response.data.length;
+        console.log("bd:",totalUsers)
         setTotalPersonal(totalUsers);
       } catch (error) {
         console.error("Error al traer los datos: ", error);

@@ -10,13 +10,12 @@ import { RolesModule } from './modules/roles/roles.module';
 import { CompaniesModule } from './modules/companies/companies.module';
 import { DocumentTypesModule } from './modules/document-types/document-types.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       load: [EnvConfigurations],
-      validationSchema: JoiValidationSchema
+      validationSchema: JoiValidationSchema,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../', 'client/dist'),
@@ -39,4 +38,4 @@ import { DocumentTypesModule } from './modules/document-types/document-types.mod
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

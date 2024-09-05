@@ -14,10 +14,10 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    })
-  )
-  const configService = app.get(ConfigService)
-  const port = configService.get<number>('PORT')
+    }),
+  );
+  const configService = app.get(ConfigService);
+  const port = configService.get<number>('PORT');
   await app.listen(port);
 }
 bootstrap();

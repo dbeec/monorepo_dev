@@ -16,9 +16,11 @@ export class RolesService {
     private readonly rolesRepository: Repository<Role>,
   ) {}
   async create(createRoleDto: CreateRoleDto) {
-    const existRole = await this.rolesRepository.findOneBy({ name: createRoleDto.name })
+    const existRole = await this.rolesRepository.findOneBy({
+      name: createRoleDto.name,
+    });
     if (existRole) {
-      throw new ConflictException('Role already exists')
+      throw new ConflictException('Role already exists');
     }
     return await this.rolesRepository.save(createRoleDto);
   }
@@ -34,11 +36,13 @@ export class RolesService {
   async update(id: number, updateRoleDto: UpdateRoleDto) {
     const existrole = await this.rolesRepository.findOneBy({ roleId: id });
     if (!existrole) {
-      throw new NotFoundException("Role not found")
+      throw new NotFoundException('Role not found');
     }
-    const role = await this.rolesRepository.findOneBy({ name: updateRoleDto.name })
+    const role = await this.rolesRepository.findOneBy({
+      name: updateRoleDto.name,
+    });
     if (role) {
-      throw new ConflictException("Role name already exists")
+      throw new ConflictException('Role name already exists');
     }
     return await this.rolesRepository.update(id, updateRoleDto);
   }
@@ -46,7 +50,7 @@ export class RolesService {
   async remove(id: number) {
     const existRole = await this.rolesRepository.findOneBy({ roleId: id });
     if (!existRole) {
-      throw new NotFoundException("Role not found")
+      throw new NotFoundException('Role not found');
     }
     return await this.rolesRepository.softDelete(id);
   }

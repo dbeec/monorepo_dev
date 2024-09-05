@@ -1,6 +1,6 @@
-import { User } from "../../entities/user.entity";
+import { User } from '../../entities/user.entity';
 
-export function mapUserToResponse(user: User){
+export function mapUserToResponse(user: User) {
   return {
     userId: user.userId,
     typeDocument: user.typeDocument.type,
@@ -16,5 +16,5 @@ export function mapUserToResponse(user: User){
     companyId: user.company.companyId,
     companyNit: user.company.nit,
     company: user.company.name,
-  }
+  };
 }

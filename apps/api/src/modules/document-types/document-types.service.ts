@@ -16,43 +16,53 @@ export class DocumentTypesService {
     private readonly documentTypeRepository: Repository<DocumentType>,
   ) {}
   async create(createDocumentTypeDto: CreateDocumentTypeDto) {
-    const documentType = await this.documentTypeRepository.findOneBy({ type: createDocumentTypeDto.type })
+    const documentType = await this.documentTypeRepository.findOneBy({
+      type: createDocumentTypeDto.type,
+    });
     if (documentType) {
-      throw new ConflictException("Document Type already exists")
+      throw new ConflictException('Document Type already exists');
     }
-    this.documentTypeRepository.create(createDocumentTypeDto)
-    return await this.documentTypeRepository.save(createDocumentTypeDto)
+    this.documentTypeRepository.create(createDocumentTypeDto);
+    return await this.documentTypeRepository.save(createDocumentTypeDto);
   }
 
   async findAll() {
-    return await this.documentTypeRepository.find()
+    return await this.documentTypeRepository.find();
   }
 
   async findOne(id: number) {
-    const documentType = await this.documentTypeRepository.findOneBy({ document_typeId: id })
+    const documentType = await this.documentTypeRepository.findOneBy({
+      document_typeId: id,
+    });
     if (!documentType) {
-      throw new NotFoundException(`Document Type ${id} not found`)
+      throw new NotFoundException(`Document Type ${id} not found`);
     }
-    return documentType
+    return documentType;
   }
 
   async update(id: number, updateDocumentTypeDto: UpdateDocumentTypeDto) {
-    const existDocumentType = await this.documentTypeRepository.findOneBy({ document_typeId: id })
+    const existDocumentType = await this.documentTypeRepository.findOneBy({
+      document_typeId: id,
+    });
     if (!existDocumentType) {
-      throw new NotFoundException(`Document Type ${id} not found`)
+      throw new NotFoundException(`Document Type ${id} not found`);
     }
-    const documentType = await this.documentTypeRepository.findOneBy({ type: updateDocumentTypeDto.type })
+    const documentType = await this.documentTypeRepository.findOneBy({
+      type: updateDocumentTypeDto.type,
+    });
     if (documentType) {
-      throw new ConflictException("Document Type already exists")
+      throw new ConflictException('Document Type already exists');
     }
-    return await this.documentTypeRepository.update(id, updateDocumentTypeDto)
+    return await this.documentTypeRepository.update(id, updateDocumentTypeDto);
   }
 
   async remove(id: number) {
-    const existDocumentType = await this.documentTypeRepository.findOneBy({ document_typeId: id })
+    const existDocumentType = await this.documentTypeRepository.findOneBy({
+      document_typeId: id,
+    });
     if (!existDocumentType) {
-      throw new NotFoundException(`Document Type ${id} not found`)
+      throw new NotFoundException(`Document Type ${id} not found`);
     }
-    return await this.documentTypeRepository.softDelete(id)
+    return await this.documentTypeRepository.softDelete(id);
   }
 }
