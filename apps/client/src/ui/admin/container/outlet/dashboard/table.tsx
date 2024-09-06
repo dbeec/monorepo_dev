@@ -48,7 +48,7 @@ export default function MainTable() {
   }, []);
 
   const columns: GridColDef[] = [
-    { field: "userId", headerName: "NO.", flex: 0.2 },
+    // { field: "userId", headerName: "NO.", flex: 0.2 },
     {
       field: "typeDocument",
       headerName: "TIPO DOC",
