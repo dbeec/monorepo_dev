@@ -17,6 +17,9 @@ export class Company {
   @Column({ unique: true })
   nit: string;
 
+  @Column({ length: 1 })
+  dv: string;
+
   @Column({ unique: true })
   name: string;
 
