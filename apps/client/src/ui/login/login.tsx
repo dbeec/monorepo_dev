@@ -2,26 +2,10 @@
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
-
-const schema = yup
-  .object({
-    email: yup
-      .string()
-      .matches(
-        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-        "Correo electrónico inválido"
-      )
-      .required("El correo electrónico es requerido"),
-    password: yup
-      .string()
-      .min(6, "La contraseña debe tener al menos 6 caracteres")
-      .max(60, "La contraseña no debe exceder los 20 caracteres")
-      .required(),
-  })
-  .required();
+import { schema } from "./yup";
+import { inputStyles } from "../../components/formstyles";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -59,26 +43,30 @@ export default function Login() {
               label="Correo electrónico"
               id="outlined-size-small"
               size="small"
+              variant="filled"
               type="email"
-              sx={{
-                width: "100%",
-              }}
+              sx={inputStyles.generalInputs}
               {...register("email")}
               error={!!errors.email}
               helperText={errors.email?.message}
               FormHelperTextProps={{
-                sx: { fontSize: ".8rem", lineHeight: "14px" },
+                sx: {
+                  fontSize: inputStyles.inputsLogin.fontSize,
+                  lineHeight: inputStyles.inputsLogin.lineHeight,
+                },
               }}
               InputLabelProps={{
                 sx: {
-                  "&.MuiInputLabel-shrink": { color: "#259780" },
+                  "&.MuiInputLabel-shrink":
+                    inputStyles.inputsLogin["&.MuiInputLabel-shrink"],
                 },
               }}
               InputProps={{
                 sx: {
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#259780",
-                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    inputStyles.inputsLogin[
+                      "&.Mui-focused .MuiOutlinedInput-notchedOutline"
+                    ],
                 },
               }}
             />
@@ -87,24 +75,30 @@ export default function Login() {
               label="Contraseña"
               id="outlined-size-small"
               size="small"
+              variant="filled"
               type="password"
-              sx={{ width: "100%" }}
+              sx={inputStyles.generalInputs}
               {...register("password")}
               error={!!errors.password}
               helperText={errors.password?.message}
               FormHelperTextProps={{
-                sx: { fontSize: ".8rem", lineHeight: "14px" },
+                sx: {
+                  fontSize: inputStyles.inputsLogin.fontSize,
+                  lineHeight: inputStyles.inputsLogin.lineHeight,
+                },
               }}
               InputLabelProps={{
                 sx: {
-                  "&.MuiInputLabel-shrink": { color: "#259780" },
+                  "&.MuiInputLabel-shrink":
+                    inputStyles.inputsLogin["&.MuiInputLabel-shrink"],
                 },
               }}
               InputProps={{
                 sx: {
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#259780",
-                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    inputStyles.inputsLogin[
+                      "&.Mui-focused .MuiOutlinedInput-notchedOutline"
+                    ],
                 },
               }}
             />

@@ -47,7 +47,7 @@ export default function RegisterCompany() {
           variant="filled"
           size="small"
           {...register("companyNit")}
-          sx={inputStyles}
+          sx={inputStyles.generalInputs}
         />
 
         <TextField
@@ -59,7 +59,7 @@ export default function RegisterCompany() {
           InputProps={{
             readOnly: true,
           }}
-          sx={inputStyles}
+          sx={inputStyles.generalInputs}
           {...register("dv")}
         />
 
@@ -69,7 +69,7 @@ export default function RegisterCompany() {
           variant="filled"
           size="small"
           {...register("companyName")}
-          sx={inputStyles}
+          sx={inputStyles.generalInputs}
         />
 
         <Button
