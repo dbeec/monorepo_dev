@@ -1,10 +1,11 @@
-import "./styles.css";
+// import "./styles.css";
 import { Button, TextField } from "@mui/material";
 import TitleViews from "../../../../../components/title-views";
 import { useForm, FieldValues } from "react-hook-form";
 import { inputStyles } from "../../../../../components/formstyles";
 import axios from "axios";
 import { useNitDV } from "./useNitDV";
+import CompaniesTable from "./table";
 
 export default function RegisterCompany() {
   const { register, handleSubmit, reset, watch } = useForm<FieldValues>();
@@ -81,6 +82,8 @@ export default function RegisterCompany() {
           Registrar Empresa
         </Button>
       </form>
+
+      <CompaniesTable />
     </>
   );
 }

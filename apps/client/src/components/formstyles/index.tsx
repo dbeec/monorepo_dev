@@ -1,12 +1,12 @@
 export const inputStyles = {
   generalInputs: {
     "& .MuiFilledInput-root": {
-      backgroundColor: "#f0f0f0", // Color de fondo del input
+      backgroundColor: "#f3f3f3", // Color de fondo del input
       "&:hover": {
-        backgroundColor: "#f2f2f2", // Color de fondo en hover
+        backgroundColor: "#f1f1f1", // Color de fondo en hover
       },
       "&.Mui-focused": {
-        backgroundColor: "#f2f2f2", // Color de fondo cuando está enfocado
+        backgroundColor: "#f1f1f1", // Color de fondo cuando está enfocado
       },
     },
     "& .MuiInputLabel-root": {
