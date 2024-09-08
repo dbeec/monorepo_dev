@@ -25,9 +25,9 @@ export const inputStyles = {
   inputsLogin: {
     fontSize: ".8rem",
     lineHeight: "14px",
-    "&.MuiInputLabel-shrink": { color: "#259780" },
+    "&.MuiInputLabel-shrink": { color: "#405d72" },
     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "#259780",
+      borderColor: "#405d72",
     },
   },
 };
