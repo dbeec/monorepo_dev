@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Box from "@mui/material/Box";
 import {
   DataGrid,
@@ -11,7 +11,8 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import "./style.css";
-import UsersInterface from "./interface";
+import UsersInterface from "../../../../../hooks/types";
+import { useQuery } from "@tanstack/react-query";
 
 const defaultColumnOptions: Partial<GridColDef> = {
   sortable: false,
@@ -20,32 +21,32 @@ const defaultColumnOptions: Partial<GridColDef> = {
   headerAlign: "center",
 };
 
+/**
+ * Traer los datos de la bd.
+ */
+const fetchData = async (): Promise<UsersInterface[]> => {
+  try {
+    const response = await axios.get("http://localhost:4005/api/users");
+    return response.data.map((user: UsersInterface) => ({
+      ...user,
+      id: String(user.id),
+      fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
+    }));
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
+
 export default function MainTable() {
-  const [data, setData] = React.useState<UsersInterface[]>([]);
-
-  /**
-   * Traer los datos de la bd.
-   */
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:4005/api/users");
-      const users = response.data.map((user: UsersInterface) => ({
-        ...user,
-        id: String(user.id),
-        fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
-      }));
-      setData(users);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  /**
-   * useEffect que ejecuta la funcion fetchData
-   */
-  React.useEffect(() => {
-    fetchData();
-  }, []);
+  const {
+    error,
+    data: dataUsers = [],
+  } = useQuery<UsersInterface[]>({
+    queryKey: ["users"],
+    queryFn: fetchData,
+    retry: false,
+  });
 
   const columns: GridColDef[] = [
     {
@@ -116,14 +117,23 @@ export default function MainTable() {
     },
   ];
 
+  if (error) return <p>Error...</p>;
+
   return (
     <Box
       sx={{ display: "grid", width: "100%", height: "45vh", bgcolor: "#fff" }}
     >
       <DataGrid
-        rows={data}
+        rows={dataUsers}
         columns={columns}
         getRowId={(row: { id: string }) => row.id}
+        loading
+        slotProps={{
+          loadingOverlay: {
+            variant: "circular-progress",
+            noRowsVariant: "skeleton",
+          },
+        }}
         initialState={{
           pagination: {
             paginationModel: {
@@ -153,5 +163,3 @@ export default function MainTable() {
     </Box>
   );
 }
-
-//

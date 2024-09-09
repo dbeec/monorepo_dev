@@ -1,4 +1,3 @@
-// import * as React from "react";
 import Box from "@mui/material/Box";
 import {
   DataGrid,
@@ -9,10 +8,9 @@ import {
 import axios from "axios";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import React from "react";
 import "./style.css";
-import CompaniesInterface from "./interface";
-
+import { useQuery } from "@tanstack/react-query";
+import CompaniesInterface from "../../../../../../hooks/types"
 const defaultColumnOptions: Partial<GridColDef> = {
   sortable: false,
   filterable: false,
@@ -20,27 +18,32 @@ const defaultColumnOptions: Partial<GridColDef> = {
   headerAlign: "center",
 };
 
+/**
+ * Traer los datos de la bd.
+ */
+const fetchData = async (): Promise<CompaniesInterface[]> => {
+  try {
+    const { data } = await axios.get("http://localhost:4005/api/companies");
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return []
+  }
+};
+
 export default function CompaniesTable() {
-  const [data, setData] = React.useState<CompaniesInterface[]>([]);
-
   /**
-   * Traer los datos de la bd.
+   * Hook useQuery
    */
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:4005/api/companies");
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  const { error, data } = useQuery({
+    queryKey: ["companies"],
+    queryFn: fetchData,
+    retry: false,
+  });
 
-  /**
-   * useEffect que ejecuta la funcion fetchData
-   */
-  React.useEffect(() => {
-    fetchData();
-  }, []);
+  if (error) {
+    return <p>Error...</p>;
+  }
 
   const columns: GridColDef[] = [
     {
@@ -85,12 +88,24 @@ export default function CompaniesTable() {
 
   return (
     <Box
-      sx={{ display: "grid", width: "100%", minHeight: "40vh", bgcolor: "#fff" }}
+      sx={{
+        display: "grid",
+        width: "100%",
+        minHeight: "40vh",
+        bgcolor: "#fff",
+      }}
     >
       <DataGrid
         rows={data}
         columns={columns}
+        loading
         getRowId={(row) => row.companyId}
+        slotProps={{
+          loadingOverlay: {
+            variant: "circular-progress",
+            noRowsVariant: "skeleton",
+          },
+        }}
         initialState={{
           pagination: {
             paginationModel: {
@@ -120,5 +135,3 @@ export default function CompaniesTable() {
     </Box>
   );
 }
-
-//

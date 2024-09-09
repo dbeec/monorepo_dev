@@ -1,15 +1,16 @@
-import { useState } from "react";
 import "./style.css";
 import Modal from "../../../../../../components/modal";
 import { TextField } from "@mui/material";
 import { inputStyles } from "../../../../../../components/formstyles";
 import { FieldValues, useForm } from "react-hook-form";
 import axios from "axios";
-import { useNitDV } from "./useNitDV";
+import { useNitDV } from "../../../../../../hooks/useNitDV";
 import CompaniesTable from "./table";
+import { useCreateCompanyStore } from "../../../../../../store/useCreateCompanyStore";
 
 export default function CompanyPreference() {
-  const [openModalCreateCompany, setOpenModalCreateCompany] = useState(false);
+  const { openModalCreateCompany, setOpenModalCreateCompany } =
+    useCreateCompanyStore();
   const { register, handleSubmit, reset, watch } = useForm<FieldValues>();
 
   /**
@@ -41,10 +42,7 @@ export default function CompanyPreference() {
   return (
     <>
       <div className="content_company_preference">
-        <button
-          className="button"
-          onClick={() => setOpenModalCreateCompany(!openModalCreateCompany)}
-        >
+        <button className="button" onClick={setOpenModalCreateCompany}>
           Crear empresa
         </button>
 
@@ -93,10 +91,7 @@ export default function CompanyPreference() {
           </div>
 
           <div className="content_buttons">
-            <button
-              className="cancel"
-              onClick={() => setOpenModalCreateCompany(!openModalCreateCompany)}
-            >
+            <button className="cancel" onClick={setOpenModalCreateCompany}>
               Cancelar
             </button>
             <button className="button" type="submit">
