@@ -1,0 +1,32 @@
+.content_preferences {
+  display: flex;
+  justify-content: space-between;
+}
+
+.companyPreference {
+  display: inherit;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  width: 200px;
+  height: 90px;
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 3px;
+  cursor: pointer;
+}
+
+.companyPreference p {
+  font-size: 0.9rem;
+}
+
+#icon {
+  color: #405d72;
+  font-size: 1.6rem;
+  transition: 0.5s all ease;
+}
+
+#icon:hover {
+  color: rgb(255, 174, 0);
+}

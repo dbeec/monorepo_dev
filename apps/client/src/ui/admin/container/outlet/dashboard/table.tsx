@@ -48,7 +48,6 @@ export default function MainTable() {
   }, []);
 
   const columns: GridColDef[] = [
-    // { field: "userId", headerName: "NO.", flex: 0.2 },
     {
       field: "typeDocument",
       headerName: "TIPO DOC",
@@ -118,7 +117,9 @@ export default function MainTable() {
   ];
 
   return (
-    <Box sx={{ display: "grid", width: "100%", bgcolor: "#fff" }}>
+    <Box
+      sx={{ display: "grid", width: "100%", height: "45vh", bgcolor: "#fff" }}
+    >
       <DataGrid
         rows={data}
         columns={columns}

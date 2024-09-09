@@ -42,14 +42,6 @@
   font-size: 1.2rem;
 }
 
-/* BLOQUE DE LA TABLA */
-
-.table_container {
-  background: #fff;
-  width: 100%;
-  height: auto;
-}
-
 /* ESTILOS DE TABLA EN DASHBOARD */
 
 .column-buttons {

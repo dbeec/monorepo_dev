@@ -30,4 +30,27 @@ export const inputStyles = {
       borderColor: "#405d72",
     },
   },
+  avatarStyles: {
+    overflow: "visible",
+    filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.15))",
+    mt: 1,
+    "& .MuiAvatar-root": {
+      width: 28,
+      height: 28,
+      ml: -0.5,
+      mr: 1,
+    },
+    "&::before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: 0,
+      right: 14,
+      width: 10,
+      height: 10,
+      bgcolor: "background.paper",
+      transform: "translateY(-50%) rotate(45deg)",
+      zIndex: 0,
+    },
+  },
 };
