@@ -52,7 +52,7 @@ export default function Preferences() {
         status={openPreferencesModal}
         changeStatus={setOpenPreferencesModal}
         title="parametrización de empresas"
-        width="900px"
+        width="700px"
         alignItems="center"
       >
         <CompanyPreference />

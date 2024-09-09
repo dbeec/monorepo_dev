@@ -85,7 +85,7 @@ export default function CompaniesTable() {
 
   return (
     <Box
-      sx={{ display: "grid", width: "100%", height: "45vh", bgcolor: "#fff" }}
+      sx={{ display: "grid", width: "100%", minHeight: "40vh", bgcolor: "#fff" }}
     >
       <DataGrid
         rows={data}
