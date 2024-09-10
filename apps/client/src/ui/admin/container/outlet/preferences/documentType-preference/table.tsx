@@ -6,11 +6,10 @@ import {
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import axios from "axios";
-import "../style.css"
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import CompaniesInterface from "../../../../../../hooks/types";
 import { useQuery } from "@tanstack/react-query";
-import CompaniesInterface from "../../../../../../hooks/types"
 
 const defaultColumnOptions: Partial<GridColDef> = {
   sortable: false,
@@ -22,23 +21,26 @@ const defaultColumnOptions: Partial<GridColDef> = {
 /**
  * Traer los datos de la bd.
  */
-const getCompanies = async (): Promise<CompaniesInterface[]> => {
+const getDocumentTypes = async (): Promise<CompaniesInterface[]> => {
   try {
-    const { data } = await axios.get("http://localhost:4005/api/companies");
+    const { data } = await axios.get(
+      "http://localhost:4005/api/document-types"
+    );
+    console.log(data)
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
-    return []
+    return [];
   }
 };
 
-export default function CompaniesTable() {
+export default function DocumentTypesTable() {
   /**
    * Hook useQuery
    */
   const { error, data } = useQuery({
-    queryKey: ["companies"],
-    queryFn: getCompanies,
+    queryKey: ["document-types"],
+    queryFn: getDocumentTypes,
     retry: false,
   });
 
@@ -48,16 +50,9 @@ export default function CompaniesTable() {
 
   const columns: GridColDef[] = [
     {
-      field: "nit",
-      headerName: "NIT",
-      flex: 0.1,
-      align: "center",
-      ...defaultColumnOptions,
-    },
-    {
-      field: "name",
-      headerName: "EMPRESA",
-      flex: 0.2,
+      field: "type",
+      headerName: "TIPO DE DOCUMENTO",
+      flex: 0.34444,
       align: "center",
       ...defaultColumnOptions,
     },
@@ -100,7 +95,7 @@ export default function CompaniesTable() {
         rows={data}
         columns={columns}
         loading
-        getRowId={(row) => row.companyId}
+        getRowId={(row) => row.document_typeId}
         slotProps={{
           loadingOverlay: {
             variant: "circular-progress",
@@ -120,7 +115,7 @@ export default function CompaniesTable() {
               <div className="tolbars">
                 <GridToolbarExport />
                 <GridToolbarQuickFilter
-                  placeholder="No. documento"
+                  placeholder="Tipo de documento"
                   size="small"
                   sx={{ width: "20%" }}
                 />

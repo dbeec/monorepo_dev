@@ -1,4 +1,4 @@
-import "./style.css";
+import "../style.css"
 import Modal from "../../../../../../components/modal";
 import { TextField } from "@mui/material";
 import { inputStyles } from "../../../../../../components/formstyles";
@@ -41,9 +41,9 @@ export default function CompanyPreference() {
   };
   return (
     <>
-      <div className="content_company_preference">
+      <div className="content_main">
         <button className="button" onClick={setOpenModalCreateCompany}>
-          Crear empresa
+          Crear
         </button>
 
         {/* Tabla para mostrar las empresas creadas */}
@@ -54,7 +54,7 @@ export default function CompanyPreference() {
       <Modal
         status={openModalCreateCompany}
         changeStatus={setOpenModalCreateCompany}
-        title="Crear empresa"
+        title="crear empresa"
       >
         <form className="content_form" onSubmit={handleSubmit(onSubmit)}>
           <div id="form">
