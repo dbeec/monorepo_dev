@@ -5,10 +5,10 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "./style.css";
-import { useState } from "react";
+import { useSidebarStore } from "../../store/useSidebarStore";
 
 export default function Sidebar({ isCollapsed }: { isCollapsed: boolean }) {
-  const [expanded, setExpanded] = useState<string | false>(false);
+  const { expanded, setExpanded } = useSidebarStore()
 
   const handleChange =
     (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {

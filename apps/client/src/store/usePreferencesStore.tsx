@@ -8,5 +8,5 @@ interface PreferencesState {
 export const usePreferencesStore = create<PreferencesState>((set) => ({
   openPreferencesModal: false,
   setOpenPreferencesModal: () =>
-    set((state) => ({ openPreferencesModal: !state.setOpenPreferencesModal })),
+    set((state) => ({ openPreferencesModal: !state.openPreferencesModal })),
 }));

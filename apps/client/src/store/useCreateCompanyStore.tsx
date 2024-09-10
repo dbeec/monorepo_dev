@@ -9,6 +9,6 @@ export const useCreateCompanyStore = create<CreateCompanyState>((set) => ({
   openModalCreateCompany: false,
   setOpenModalCreateCompany: () =>
     set((state) => ({
-      openModalCreateCompany: !state.setOpenModalCreateCompany,
+      openModalCreateCompany: !state.openModalCreateCompany,
     })),
 }));
