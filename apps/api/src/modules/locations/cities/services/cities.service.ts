@@ -20,6 +20,10 @@ export class CitiesService {
     return await this.additionalService.getOneCity(id);
   }
 
+  async findCityByDepartment(id: number){
+    return await this.additionalService.getCityByDepartment(id)
+  }
+
   async update(id: string, updateCityDto: UpdateCityDto) {
     return await this.additionalService.updateCity(id, updateCityDto);
   }

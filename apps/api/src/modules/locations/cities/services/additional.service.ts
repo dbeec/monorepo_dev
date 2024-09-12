@@ -1,24 +1,29 @@
-import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
-import { Repository } from "typeorm";
-import { City } from "../entities/city.entity";
-import { CreateCityDto } from "../dto/create-city.dto";
-import { UpdateCityDto } from "../dto/update-city.dto";
-import { InjectRepository } from "@nestjs/typeorm";
-
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { City } from '../entities/city.entity';
+import { CreateCityDto } from '../dto/create-city.dto';
+import { UpdateCityDto } from '../dto/update-city.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class AdditionalServices{
+export class AdditionalServices {
   constructor(
     @InjectRepository(City)
     private readonly cityRepository: Repository<City>,
-  ){}
+  ) {}
   // Funtions for the additional services
   async getAllCities(): Promise<City[]> {
     return await this.cityRepository.find();
   }
 
-  async getOneCity(id: string): Promise<City>{
-    const city = await this.cityRepository.findOne({ where: {dane_cod_city: id }});
+  async getOneCity(id: string): Promise<City> {
+    const city = await this.cityRepository.findOne({
+      where: { dane_cod_city: id },
+    });
     if (!city) {
       throw new NotFoundException('City not found');
     }
@@ -26,34 +31,46 @@ export class AdditionalServices{
   }
 
   async createCity(createCityDto: CreateCityDto): Promise<City> {
-    await this.validateCityCodeExists(createCityDto.dane_cod_city)
-    await this.validateCityNameExists(createCityDto.dane_cod_city)
+    await this.validateCityCodeExists(createCityDto.dane_cod_city);
+    await this.validateCityNameExists(createCityDto.dane_cod_city);
     return await this.cityRepository.save(createCityDto);
   }
 
   async updateCity(id: string, updateCityDto: UpdateCityDto): Promise<City> {
-    await this.validateCityCodeExists(id)
-    await this.validateCityNameExists(updateCityDto.dane_cod_city)
-    await this.cityRepository.update(id,{
-      ...updateCityDto
-    })
-    return ;
+    await this.validateCityCodeExists(id);
+    await this.validateCityNameExists(updateCityDto.dane_cod_city);
+    await this.cityRepository.update(id, {
+      ...updateCityDto,
+    });
+    return;
   }
 
+  async getCityByDepartment(id: number): Promise<City[]> {
+    const department = await this.cityRepository.find({
+      where: { departmentId: id },
+      select: ['city', 'dane_cod_city', 'department'],
+    });
+    if (!department) {
+      throw new NotFoundException('Department not found');
+    }
+    return department;
+  }
 
-    // Validations for the additional services
-    async validateCityCodeExists(cityId: string): Promise<City> {
-      const CityExist = await this.cityRepository.findOne({ where: {dane_cod_city: cityId }});
-      if (CityExist) {
-        throw new ConflictException('City code exists');
-      }
-      return CityExist;
+  // Validations for the additional services
+  async validateCityCodeExists(cityId: string): Promise<City> {
+    const CityExist = await this.cityRepository.findOne({
+      where: { dane_cod_city: cityId },
+    });
+    if (CityExist) {
+      throw new ConflictException('City code exists');
     }
-    async validateCityNameExists(city: string): Promise<City> {
-      const CityExist = await this.cityRepository.findOne({ where: { city }});
-      if (CityExist) {
-        throw new ConflictException('City name exists');
-      }
-      return CityExist;
+    return CityExist;
+  }
+  async validateCityNameExists(city: string): Promise<City> {
+    const CityExist = await this.cityRepository.findOne({ where: { city } });
+    if (CityExist) {
+      throw new ConflictException('City name exists');
     }
+    return CityExist;
+  }
 }

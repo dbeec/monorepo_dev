@@ -23,6 +23,11 @@ export class citiesController {
     return this.citiesService.findOne(id);
   }
 
+  @Get('byDepartment/:id')
+  findCityByDepartment(@Param('id') id: string){
+    return this.citiesService.findCityByDepartment(+id);
+  }
+
   @Patch('updateBy/:id')
   update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
     return this.citiesService.update(id, updateCityDto);
