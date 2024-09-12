@@ -7,6 +7,7 @@ import { DocumentTypesModule } from '../document-types/document-types.module';
 import { RolesModule } from '../roles/roles.module';
 import { CompaniesModule } from '../companies/companies.module';
 import { AdditionalServices } from './services/additionals.service';
+import { CitiesModule, DepartmentsModule } from '../locations/index.module';
 
 @Module({
   imports: [
@@ -14,8 +15,11 @@ import { AdditionalServices } from './services/additionals.service';
     DocumentTypesModule,
     RolesModule,
     CompaniesModule,
+    DepartmentsModule,
+    CitiesModule
   ],
   controllers: [UsersController],
   providers: [UsersService, AdditionalServices],
+  exports: [TypeOrmModule],
 })
 export class UsersModule {}

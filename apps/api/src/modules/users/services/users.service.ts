@@ -17,7 +17,9 @@ export class UsersService {
     private readonly AdditionalServices: AdditionalServices,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    await this.AdditionalServices.validateDocumentExists(createUserDto.document);
+    await this.AdditionalServices.validateDocumentExists(
+      createUserDto.document,
+    );
     await this.AdditionalServices.validateEmailExists(createUserDto.email);
     const documentType =
       await this.AdditionalServices.validateDocumentTypeExists(
@@ -30,6 +32,14 @@ export class UsersService {
       createUserDto.company,
     );
 
+    const department = await this.AdditionalServices.validateDepartmentExists(
+      createUserDto.department,
+    );
+
+    const city = await this.AdditionalServices.validateCityExists(
+      createUserDto.city,
+    );
+
     const hashedPassword = await hashPassword(createUserDto.password);
 
     const user = this.userRepository.create({
@@ -38,6 +48,8 @@ export class UsersService {
       password: hashedPassword,
       roles: role,
       company: company,
+      department: department,
+      city: city,
     });
 
     await this.userRepository.save(user);
@@ -78,12 +90,20 @@ export class UsersService {
     const company = await this.AdditionalServices.validateCompanyExists(
       updateUserDto.company,
     );
+    const department = await this.AdditionalServices.validateDepartmentExists(
+      updateUserDto.department,
+    );
+    const city = await this.AdditionalServices.validateCityExists(
+      updateUserDto.city,
+    );
 
     await this.userRepository.update(id, {
       ...updateUserDto,
       typeDocument: documentType,
       roles,
       company,
+      department,
+      city,
     });
 
     return { message: 'Updated' };
@@ -98,6 +118,6 @@ export class UsersService {
   }
 
   async AllUserCounts() {
-    return this.AdditionalServices.countUsers()
+    return this.AdditionalServices.countUsers();
   }
 }

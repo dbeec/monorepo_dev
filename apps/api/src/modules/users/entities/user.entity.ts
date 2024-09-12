@@ -1,5 +1,7 @@
 import { Company } from 'src/modules/companies/entities/company.entity';
 import { DocumentType } from 'src/modules/document-types/entities/document-type.entity';
+import { City } from 'src/modules/locations/cities/entities/city.entity';
+import { Department } from 'src/modules/locations/departments/entities/department.entity';
 import { Role } from 'src/modules/roles/entities/role.entity';
 import {
   Column,
@@ -57,6 +59,14 @@ export class User {
   @ManyToOne(() => Company, (company) => company.users, { eager: true })
   @JoinColumn({ name: 'companyId' })
   company: Company;
+
+  @ManyToOne(() => Department, (department) => department.users, { eager: true })
+  @JoinColumn({ name: 'departmentId' })
+  department: Department;
+
+  @ManyToOne(() => City, (city) => city.users, { eager: true })
+  @JoinColumn({ name: 'cityId' })
+  city: City;
 
   @CreateDateColumn()
   createdAt: Date;

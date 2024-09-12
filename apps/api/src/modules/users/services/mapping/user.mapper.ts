@@ -16,5 +16,7 @@ export function mapUserToResponse(user: User) {
     companyId: user.company.companyId,
     companyNit: user.company.nit,
     company: user.company.name,
+    department: user.department.department,
+    city: user.city.city,
   };
 }

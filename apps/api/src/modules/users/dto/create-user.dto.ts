@@ -42,4 +42,10 @@ export class CreateUserDto {
 
   @IsNumber()
   company: number;
+
+  @IsNumber()
+  department: number;
+
+  @IsString()
+  city: string;
 }

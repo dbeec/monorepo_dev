@@ -1,5 +1,6 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Department } from '../../departments/entities/department.entity';
+import { User } from 'src/modules/users/entities/user.entity';
 
 @Entity({ name: 'cities' })
 export class City {
@@ -15,4 +16,7 @@ export class City {
   @ManyToOne(() => Department, (department) => department.city, { eager: true })
   @JoinColumn({ name: 'departmentId' })
   department: Department;
+
+  @OneToMany(() => User, (user) => user.city)
+  users: User[];
 }
