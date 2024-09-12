@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { DepartmentsService } from './departments.service';
-import { CreateDepartmentDto } from './dto/create-department.dto';
-import { UpdateDepartmentDto } from './dto/update-department.dto';
+import { CreateDepartmentDto } from '../dto/create-department.dto';
+import { UpdateDepartmentDto } from '../dto/update-department.dto';
+import { DepartmentsService } from '../services/departments.service';
 
 @Controller('departments')
 export class DepartmentsController {
@@ -17,12 +17,12 @@ export class DepartmentsController {
     return this.departmentsService.findAll();
   }
 
-  @Get(':id')
+  @Get('by/:id')
   findOne(@Param('id') id: string) {
     return this.departmentsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('updateBy/:id')
   update(@Param('id') id: string, @Body() updateDepartmentDto: UpdateDepartmentDto) {
     return this.departmentsService.update(+id, updateDepartmentDto);
   }
