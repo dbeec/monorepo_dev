@@ -9,6 +9,7 @@ import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { CompaniesModule } from './modules/companies/companies.module';
 import { DocumentTypesModule } from './modules/document-types/document-types.module';
+import { DepartmentsModule } from './modules/departments/departments.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { DocumentTypesModule } from './modules/document-types/document-types.mod
     RolesModule,
     CompaniesModule,
     DocumentTypesModule,
+    DepartmentsModule,
   ],
   controllers: [],
   providers: [],

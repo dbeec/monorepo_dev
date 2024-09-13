@@ -5,29 +5,23 @@ import BusinessIcon from "@mui/icons-material/Business";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import MainTable from "./table";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useTotalUsers } from "../../../../../hooks/useTotalUsers";
+import { Skeleton } from "@mui/material";
 
 export default function AdminContent() {
-  const [totalPersonal, setTotalPersonal] = useState<number | null>(null);
+  /**
+   * Hook personaliado
+   */
+  const { isLoading, error, data } = useTotalUsers();
 
   /**
-   * useEffect para traer el numero total de usuarios registrados. (contador)
+   * Estados de carga del hook
    */
-  useEffect(() => {
-    const fetchTotalPersonal = async () => {
-      try {
-        const totalUsers = await axios.get(
-          "http://localhost:4005/api/users/all-counts"
-        );
-        setTotalPersonal(totalUsers.data);
-      } catch (error) {
-        console.error("Error al traer los datos: ", error);
-      }
-    };
 
-    fetchTotalPersonal();
-  }, []);
+  if (error) {
+    return <p>Error al cargar los datos</p>;
+  }
+
   return (
     <>
       <TitleViews
@@ -42,7 +36,7 @@ export default function AdminContent() {
           </div>
           <div className="card_content">
             <span>Total personal</span>
-            <p>{totalPersonal !== null ? totalPersonal : "Cargando..."}</p>{" "}
+            <p>{isLoading ? <Skeleton /> : (data ?? 0)}</p>
           </div>
         </div>
 

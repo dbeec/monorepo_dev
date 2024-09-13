@@ -1,4 +1,3 @@
-// import * as React from "react";
 import Box from "@mui/material/Box";
 import {
   DataGrid,
@@ -7,11 +6,9 @@ import {
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import axios from "axios";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import "./style.css";
-import UsersInterface from "../../../../../hooks/types";
+import CompaniesInterface from "../../../../../../hooks/types";
 import { useQuery } from "@tanstack/react-query";
 
 const defaultColumnOptions: Partial<GridColDef> = {
@@ -24,80 +21,48 @@ const defaultColumnOptions: Partial<GridColDef> = {
 /**
  * Traer los datos de la bd.
  */
-const fetchData = async (): Promise<UsersInterface[]> => {
+const getDocumentTypes = async (): Promise<CompaniesInterface[]> => {
   try {
-    const response = await axios.get("http://localhost:4005/api/users");
-    return response.data.map((user: UsersInterface) => ({
-      ...user,
-      id: String(user.id),
-      fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
-    }));
+    const { data } = await axios.get(
+      "http://localhost:4005/api/document-types"
+    );
+    console.log(data)
+    return data;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
   }
 };
 
-export default function MainTable() {
-  const {
-    error,
-    data: dataUsers = [],
-  } = useQuery<UsersInterface[]>({
-    queryKey: ["users"],
-    queryFn: fetchData,
+export default function DocumentTypesTable() {
+  /**
+   * Hook useQuery
+   */
+  const { error, data } = useQuery({
+    queryKey: ["document-types"],
+    queryFn: getDocumentTypes,
     retry: false,
   });
 
+  if (error) {
+    return <p>Error...</p>;
+  }
+
   const columns: GridColDef[] = [
     {
-      field: "typeDocument",
-      headerName: "TIPO DOC",
-      flex: 0.15,
-      align: "center",
-      ...defaultColumnOptions,
-    },
-    {
-      field: "document",
-      headerName: "NO. DOCUMENTO",
-      flex: 0.3,
-      align: "right",
-      ...defaultColumnOptions,
-    },
-    {
-      field: "fullname",
-      headerName: "NOMBRE COMPLETO",
-      flex: 0.6,
-      align: "left",
-      ...defaultColumnOptions,
-    },
-    {
-      field: "company",
-      headerName: "EMPRESA",
-      flex: 0.35,
-      align: "center",
-      ...defaultColumnOptions,
-    },
-    {
-      field: "role",
-      headerName: "CARGO",
-      flex: 0.35,
+      field: "type",
+      headerName: "TIPO DE DOCUMENTO",
+      flex: 0.34444,
       align: "center",
       ...defaultColumnOptions,
     },
     {
       field: "actions",
       headerName: "ACCIÓN",
-      flex: 0.3,
+      flex: 0.1,
       ...defaultColumnOptions,
       renderCell: () => (
         <div className="column-buttons">
-          <VisibilityOutlinedIcon
-            style={{
-              cursor: "pointer",
-              color: "#1976d2",
-              fontSize: "1.2rem",
-            }}
-          />
           <EditOutlinedIcon
             style={{
               cursor: "pointer",
@@ -117,17 +82,20 @@ export default function MainTable() {
     },
   ];
 
-  if (error) return <p>Error...</p>;
-
   return (
     <Box
-      sx={{ display: "grid", width: "100%", height: "45vh", bgcolor: "#fff" }}
+      sx={{
+        display: "grid",
+        width: "100%",
+        minHeight: "40vh",
+        bgcolor: "#fff",
+      }}
     >
       <DataGrid
-        rows={dataUsers}
+        rows={data}
         columns={columns}
-        getRowId={(row: { id: string }) => row.id}
         loading
+        getRowId={(row) => row.document_typeId}
         slotProps={{
           loadingOverlay: {
             variant: "circular-progress",
@@ -147,7 +115,7 @@ export default function MainTable() {
               <div className="tolbars">
                 <GridToolbarExport />
                 <GridToolbarQuickFilter
-                  placeholder="No. documento"
+                  placeholder="Tipo de documento"
                   size="small"
                   sx={{ width: "20%" }}
                 />

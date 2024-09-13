@@ -1,4 +1,3 @@
-// import * as React from "react";
 import Box from "@mui/material/Box";
 import {
   DataGrid,
@@ -6,12 +5,12 @@ import {
   GridToolbarExport,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
-// import axios from "axios";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import axios from "axios";
+import "../style.css"
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-// import "./style.css";
-// import UsersInterface from "./interface";
+import { useQuery } from "@tanstack/react-query";
+import CompaniesInterface from "../../../../../../hooks/types"
 
 const defaultColumnOptions: Partial<GridColDef> = {
   sortable: false,
@@ -20,62 +19,55 @@ const defaultColumnOptions: Partial<GridColDef> = {
   headerAlign: "center",
 };
 
+/**
+ * Traer los datos de la bd.
+ */
+const getCompanies = async (): Promise<CompaniesInterface[]> => {
+  try {
+    const { data } = await axios.get("http://localhost:4005/api/companies");
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return []
+  }
+};
+
 export default function CompaniesTable() {
-  // const [data, setData] = React.useState<UsersInterface[]>([]);
-
   /**
-   * Traer los datos de la bd.
+   * Hook useQuery
    */
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4005/api/companies");
-  //     const users = response.data.map((user: UsersInterface) => ({
-  //       ...user,
-  //       id: String(user.id),
-  //       fullname: `${user.firstsurname} ${user.secondsurname ? user.secondsurname + " " : ""}${user.firstname} ${user.middlename ? user.middlename : ""}`,
-  //     }));
-  //     setData(users);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
+  const { error, data } = useQuery({
+    queryKey: ["companies"],
+    queryFn: getCompanies,
+    retry: false,
+  });
 
-  /**
-   * useEffect que ejecuta la funcion fetchData
-   */
-  // React.useEffect(() => {
-  //   fetchData();
-  // }, []);
+  if (error) {
+    return <p>Error...</p>;
+  }
 
   const columns: GridColDef[] = [
     {
       field: "nit",
       headerName: "NIT",
-      flex: 0.15,
+      flex: 0.1,
       align: "center",
       ...defaultColumnOptions,
     },
     {
       field: "name",
       headerName: "EMPRESA",
-      flex: 0.3,
-      align: "right",
+      flex: 0.2,
+      align: "center",
       ...defaultColumnOptions,
     },
     {
       field: "actions",
       headerName: "ACCIÓN",
-      flex: 0.3,
+      flex: 0.1,
       ...defaultColumnOptions,
       renderCell: () => (
         <div className="column-buttons">
-          <VisibilityOutlinedIcon
-            style={{
-              cursor: "pointer",
-              color: "#1976d2",
-              fontSize: "1.2rem",
-            }}
-          />
           <EditOutlinedIcon
             style={{
               cursor: "pointer",
@@ -96,11 +88,25 @@ export default function CompaniesTable() {
   ];
 
   return (
-    <Box sx={{ display: "grid", width: "100%", bgcolor: "#fff" }}>
+    <Box
+      sx={{
+        display: "grid",
+        width: "100%",
+        minHeight: "40vh",
+        bgcolor: "#fff",
+      }}
+    >
       <DataGrid
-        // rows={data}
+        rows={data}
         columns={columns}
-        getRowId={(row: { id: string }) => row.id}
+        loading
+        getRowId={(row) => row.companyId}
+        slotProps={{
+          loadingOverlay: {
+            variant: "circular-progress",
+            noRowsVariant: "skeleton",
+          },
+        }}
         initialState={{
           pagination: {
             paginationModel: {
@@ -130,5 +136,3 @@ export default function CompaniesTable() {
     </Box>
   );
 }
-
-//

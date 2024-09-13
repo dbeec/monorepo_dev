@@ -8,9 +8,13 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import "./style.css";
+import { inputStyles } from "../formstyles";
+import { Link } from "react-router-dom";
 
 export default function ProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -21,19 +25,18 @@ export default function ProfileMenu() {
 
   return (
     <>
-      <div
-        style={{ display: "flex", alignItems: "center", textAlign: "center" }}
-      >
-        <Tooltip title="Account settings">
+      <div className="content_avatar">
+        <Tooltip title="Perfil">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>J</Avatar>
+            <Avatar variant="rounded" sx={{ width: 30, height: 30 }}>
+              J
+            </Avatar>
           </IconButton>
         </Tooltip>
       </div>
@@ -45,48 +48,34 @@ export default function ProfileMenu() {
         onClick={handleClose}
         PaperProps={{
           elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.15))",
-            mt: 1,
-            "& .MuiAvatar-root": {
-              width: 35,
-              height: 35,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&::before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
+          sx: { ...inputStyles.avatarStyles },
         }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Johan Díaz
+        <MenuItem id="menu" onClick={handleClose}>
+          <Avatar variant="rounded" /> <p className="avatar_text">Johan Díaz</p>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem id="menu" onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          <p className="avatar_text">Configs</p>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+
+        <Link to="/preferences">
+          <MenuItem id="menu">
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            <p className="avatar_text">Preferencias</p>
+          </MenuItem>
+        </Link>
+        
+        <MenuItem id="menu" onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          <p className="avatar_text">Logout</p>
         </MenuItem>
       </Menu>
     </>

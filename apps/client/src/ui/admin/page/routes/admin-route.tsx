@@ -2,7 +2,7 @@ import { RouteObject } from "react-router-dom";
 import Admin from "../../container";
 import ErrorPage from "../../../../error-page";
 import AdminContent from "../../container/outlet/dashboard";
-import RegisterCompany from "../../container/outlet/companies";
+import Preferences from "../../container/outlet/preferences";
 
 export const adminRouter: RouteObject = {
   element: <Admin />,
@@ -14,8 +14,8 @@ export const adminRouter: RouteObject = {
       element: <AdminContent />,
     },
     {
-      path: "/company/registerCompany",
-      element: <RegisterCompany />,
+      path: "/preferences",
+      element: <Preferences />,
     },
   ],
 };
