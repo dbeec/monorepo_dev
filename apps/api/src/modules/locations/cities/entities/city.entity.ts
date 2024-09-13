@@ -23,6 +23,4 @@ export class City {
 
   @OneToMany(() => Company, (company) => company.city)
   company: Company[];
-
-  
 }

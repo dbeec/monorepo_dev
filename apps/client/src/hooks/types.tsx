@@ -21,5 +21,13 @@ export default interface UsersInterface {
 export default interface CompaniesInterface {
   nit: string;
   dv: string;
-  name: string
+  name: string;
+}
+
+/**
+ * Tipado de la tabla que muestra todos los departamentos
+ */
+export default interface DepartmentsInterface {
+  dane_cod_department: number;
+  department: string;
 }

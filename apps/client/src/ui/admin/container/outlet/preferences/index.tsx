@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CompanyPreference from "./company-preference";
 import { usePreferencesStore } from "../../../../../store/useModalPreferencesStore";
 import DocumentTypePreference from "./documentType-preference";
+import DepartmentPreference from "./department-preferences";
 
 export default function Preferences() {
   const { openCompanyPreferencesModal, setOpenCompanyPreferencesModal } =
@@ -12,6 +13,10 @@ export default function Preferences() {
   const {
     openDocumentTypePreferencesModal,
     setOpenDocumentTypePreferencesModal,
+  } = usePreferencesStore();
+  const {
+    openDepartmentsPreferencesModal,
+    setOpenDepartmentsPreferencesModal,
   } = usePreferencesStore();
 
   return (
@@ -29,7 +34,10 @@ export default function Preferences() {
           <p>Empresas</p>
         </div>
 
-        <div className="cardPreference">
+        <div
+          className="cardPreference"
+          onClick={setOpenDepartmentsPreferencesModal}
+        >
           <AddIcon style={{ fontSize: "1.6rem", color: "#758694" }} />
           <p>Departamentos</p>
         </div>
@@ -61,11 +69,13 @@ export default function Preferences() {
 
       {/* Modal que muestra todos los departamentos */}
       <Modal
+        status={openDepartmentsPreferencesModal}
+        changeStatus={setOpenDepartmentsPreferencesModal}
         title="parametrización - departamentos"
         width="700px"
         alignItems="center"
       >
-        {/* Componente de tabla departamentos */}
+        <DepartmentPreference />
       </Modal>
 
       {/* Modal que muestra todas las ciudades */}
