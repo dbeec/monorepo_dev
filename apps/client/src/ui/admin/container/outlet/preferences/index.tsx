@@ -6,6 +6,7 @@ import CompanyPreference from "./company-preference";
 import { usePreferencesStore } from "../../../../../store/useModalPreferencesStore";
 import DocumentTypePreference from "./documentType-preference";
 import DepartmentPreference from "./department-preferences";
+import CitiesTable from "./city-preferences/table";
 
 export default function Preferences() {
   const { openCompanyPreferencesModal, setOpenCompanyPreferencesModal } =
@@ -18,6 +19,8 @@ export default function Preferences() {
     openDepartmentsPreferencesModal,
     setOpenDepartmentsPreferencesModal,
   } = usePreferencesStore();
+  const { openCitiesPreferencesModal, setOpenCitiesPreferencesModal } =
+    usePreferencesStore();
 
   return (
     <>
@@ -42,7 +45,7 @@ export default function Preferences() {
           <p>Departamentos</p>
         </div>
 
-        <div className="cardPreference">
+        <div className="cardPreference" onClick={setOpenCitiesPreferencesModal}>
           <AddIcon style={{ fontSize: "1.6rem", color: "#758694" }} />
           <p>Ciudades</p>
         </div>
@@ -80,11 +83,13 @@ export default function Preferences() {
 
       {/* Modal que muestra todas las ciudades */}
       <Modal
+        status={openCitiesPreferencesModal}
+        changeStatus={setOpenCitiesPreferencesModal}
         title="parametrización - ciudades"
         width="700px"
         alignItems="center"
       >
-        {/* Componente de tabla departamentos */}
+        <CitiesTable />
       </Modal>
 
       {/* Modal que muestra los tipos de documentos creados en una tabla */}

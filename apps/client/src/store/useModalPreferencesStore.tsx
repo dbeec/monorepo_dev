@@ -9,12 +9,16 @@ interface PreferencesState {
 
   openDepartmentsPreferencesModal: boolean;
   setOpenDepartmentsPreferencesModal: () => void;
+
+  openCitiesPreferencesModal: boolean;
+  setOpenCitiesPreferencesModal: () => void;
 }
 
 export const usePreferencesStore = create<PreferencesState>((set) => ({
   openCompanyPreferencesModal: false,
   openDocumentTypePreferencesModal: false,
   openDepartmentsPreferencesModal: false,
+  openCitiesPreferencesModal: false,
 
   setOpenCompanyPreferencesModal: () =>
     set((state) => ({
@@ -29,5 +33,10 @@ export const usePreferencesStore = create<PreferencesState>((set) => ({
   setOpenDepartmentsPreferencesModal: () =>
     set((state) => ({
       openDepartmentsPreferencesModal: !state.openDepartmentsPreferencesModal,
+    })),
+
+  setOpenCitiesPreferencesModal: () =>
+    set((state) => ({
+      openCitiesPreferencesModal: !state.openCitiesPreferencesModal,
     })),
 }));
