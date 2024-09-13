@@ -1,4 +1,4 @@
-import { IsString, MaxLength, MinLength } from 'class-validator';
+import { IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateCompanyDto {
   @IsString()
@@ -7,9 +7,15 @@ export class CreateCompanyDto {
 
   @IsString()
   @MaxLength(1)
-  dv: string
+  dv: string;
 
   @IsString()
   @MinLength(3)
   name: string;
+
+  @IsNumber()
+  department: number;
+
+  @IsString()
+  city: string;
 }

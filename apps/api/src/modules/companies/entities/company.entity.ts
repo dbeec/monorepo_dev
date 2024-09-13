@@ -1,9 +1,13 @@
+import { City } from 'src/modules/locations/cities/entities/city.entity';
+import { Department } from 'src/modules/locations/departments/entities/department.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -37,4 +41,12 @@ export class Company {
 
   @OneToMany(() => User, (users) => users.company)
   users: User[];
+
+  @ManyToOne(() => Department, (departments) => departments.company, { eager: true })
+  @JoinColumn({ name: 'departmentId' })
+  department: Department;
+
+  @ManyToOne(() => City, (cities) => cities.company, { eager: true })
+  @JoinColumn({ name: 'cityId' })
+  city: City;
 }

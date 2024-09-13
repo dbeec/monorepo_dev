@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { City } from '../../cities/entities/city.entity';
 import { User } from 'src/modules/users/entities/user.entity';
+import { Company } from 'src/modules/companies/entities/company.entity';
 
 @Entity({ name: 'departments' })
 export class Department {
@@ -15,4 +16,7 @@ export class Department {
 
   @OneToMany(() => User, (user) => user.department)
   users: User[];
+
+  @OneToMany(() => Company, (company) => company.city)
+  company: Company[];
 }
