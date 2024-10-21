@@ -1,4 +1,4 @@
-import "../style.css"
+import "../style.css";
 import Modal from "../../../../../../components/modal";
 import { TextField } from "@mui/material";
 import { inputStyles } from "../../../../../../components/formstyles";
@@ -26,6 +26,8 @@ export default function CompanyPreference() {
       nit: data.companyNit,
       dv: dv,
       name: data.companyName,
+      departament: data.department,
+      ciudad: data.city
     };
 
     try {
@@ -86,6 +88,24 @@ export default function CompanyPreference() {
               variant="filled"
               size="small"
               {...register("companyName")}
+              sx={inputStyles.generalInputs}
+            />
+
+            <TextField
+              type="text"
+              label="Departamento"
+              variant="filled"
+              size="small"
+              {...register("department")}
+              sx={inputStyles.generalInputs}
+            />
+
+            <TextField
+              type="text"
+              label="Ciudad"
+              variant="filled"
+              size="small"
+              {...register("city")}
               sx={inputStyles.generalInputs}
             />
           </div>
