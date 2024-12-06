@@ -120,7 +120,7 @@ export default function CitiesTable() {
               <div className="tolbars">
                 <GridToolbarExport />
                 <GridToolbarQuickFilter
-                  placeholder="Ciudad"
+                  placeholder="Buscar ciudad"
                   size="small"
                   sx={{ width: "20%" }}
                 />
